@@ -1,0 +1,11 @@
+#rechte korigiren um xcsoare ohne root rechte ausfüren zu können
+
+
+KERNEL=="ump", SUBSYSTEMS=="ump" , GROUP="ump" , MODE="660"
+
+KERNEL=="mali", SUBSYSTEMS=="mali" , GROUP="mali" , MODE="660"
+
+KERNEL=="mice", SUBSYSTEMS=="input" , GROUP="mice" , MODE="660"
+KERNEL=="mouse[0-9]", SUBSYSTEMS=="input" , GROUP="mice" , MODE="660"
+
+KERNEL=="event[0-9]", SUBSYSTEMS=="input" , GROUP="mice" , MODE="660"
