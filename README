@@ -4,7 +4,7 @@ autor: Florian Rassl
 email: frassl@gmx.de
 
 dir's:
-GN01:			root Tree
+GN01:			
 |-->bin:			link to scripts.
 |-->boot:			boot files.
 |-->image:			boot image files.
@@ -17,9 +17,6 @@ GN01:			root Tree
 |-->scripts:		scripts, libs and bins.
 |-->src:			socecode for linux, mali and uBoot.
 
-
-the Makefile and build scripts are in scripts.
-change to dir "skripts" and type make help to get mor info.
 
 
 Makefile and scripts are not tested jet.
