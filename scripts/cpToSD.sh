@@ -3,7 +3,7 @@
 copyToSD() {
 	info "copy / \"root\" to SD"
 	DEV=$1
-	[[ $(blkid ${DEV}${RP}) != *"TYPE=\"ext4\""* ]] && errorExit 1 "error setup disk first"	
+	[[ $(blkid ${DEV}${RP}) != *"TYPE=\"ext4\""* ]] && echo "error setup disk first" && exit 1
 	mountDev ${DEV} ${MNTROOT}
 	rsync -avx --delete ${ROOT} ${MNTROOT}
 	echo "sync"

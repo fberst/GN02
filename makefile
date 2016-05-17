@@ -5,7 +5,10 @@ SHELL := /bin/bash
 #
 ######################################
 ##DEFAULTS
-export DEFAULTDEV=/dev/mmcblk0# #default dev
+export SD=/dev/mmcblk2# #default sdcard
+export BOOTBD=${SD}p1#  #default boot block dev
+export ROOTBD=${SD}p2#  #default root block dev
+
 export DEFAULTEDITOR=vim#       #default editor
 
 export CLEARROOT=false#  #clear root when making new $root " -mr "
@@ -49,9 +52,7 @@ chrootSD: mountall
 	@echo "TODO"
 	exit 0
 	${SC}/lib/chroot.sh ${MNTROOT}
-mkSD:
-	SD=$1
-	formatSD ${SD}
+mkSD: fdisk
 	cptosd ${SD}
 
 clean:
@@ -60,11 +61,16 @@ clean:
 mkimg:
 	@echo "TODO"
 
-mountall:
+mountall: umountall
 	@echo "TODO"
 
-fdisk:
-	@echo "TODO"
+umountall:
+	@echo "umount all"
+	${SC}/umount.sh
+
+fdisk: umountall
+	@echo fdisk
+	${SC}/fDisk.sh ${SD}
 
 cptosd:
 	@echo "TODO"

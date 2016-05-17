@@ -4,7 +4,6 @@ autor: Florian Rassl
 email: frassl@gmx.de
 
 GN02:
-|-->bin:			link to scripts.
 |-->boot:			boot files.
 |-->image:			.img files.
 |-->res:			resorces
