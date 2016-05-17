@@ -1,23 +1,30 @@
 #!/bin/bash
 
-cd /home/florian/gn02/scripts/
+#VERSION
+#SUITE=testing
+SUITE=jessie 
+#ARCH
+ARCH=armhf
 
-[ ! -x config.sh ] && echo "config not found" && exit 1
-. config.sh
+cd ${SCRIPTS}
 
-[ ${UID} != 0 ] && exit 1
-[ -z ${ROOT} ] && exit 1
+#[ ! -x lib/chroot.sh ] && echo "lib/chroot.sh not found" && exit 1
+#. lib/chroot.sh
+
+[ ${UID} != 0 ] && echo "I'm not root" && exit 1
+[ -z ${ROOT} ] && echo "'$'root not set" exit 1
 
 echo "makeBaseSystem"	
-	
+
+
 if [[ $CLEARROOT == "true" ]]; then
 	rm -rf ${ROOT}/* #clear $root
 	#make new min root 
-	sudo debootstrap --verbose --arch $ARCH --variant=minbase --include=$INC --foreign $SUITE ${ROOT/} http://ftp.debian.org/debian
+	sudo debootstrap --verbose --arch $ARCH --variant=minbase --foreign $SUITE ${ROOT}/ http://ftp.debian.org/debian
 fi
 
-cp ${BIN}"/initcfg.sh" ${ROOT}"/root/"			#config
-cp ${BIN}"/initGn.sh" ${ROOT}"/root/gn01.sh"	#cp this script to newRoot
+
+cp ${SCRIPTS}"/initGn.sh" ${ROOT}"/root/initGn.sh"	#cp this script to newRoot
 	
 #cp driver staf to root and install mali driver #TODO
 	
@@ -74,4 +81,4 @@ if [ -e ${FILES}"/modules" ]; then
 	chown root:root ${ROOT}"/etc/modules"
 fi
 
-#chrootExec $ROOT/ "/root/initGn.sh"  #ecec this script on newRoot
+./lib/chroot.sh $ROOT/ "/root/initGn.sh"  #ecec this script on newRoot

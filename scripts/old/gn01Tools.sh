@@ -14,8 +14,6 @@
 
 exit 1 #dont use 
 
-[ -x ./config.sh ] && . ./config.sh	#include config
-[ $? != 0 ] && echo "error" && exit 1
 [ -x ./lib/chroot.sh ] && . ./lib/chroot.sh	#include chrootFunctions
 [ $? != 0 ] && echo "error" && exit 1
 [ -x ./lib/mount.sh ] && . ./lib/mount.sh 	#include mount.sh

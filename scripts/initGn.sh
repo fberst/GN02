@@ -1,31 +1,70 @@
 #!/bin/bash
 
-##include config and lib's
-if [ -e config.sh ]; then
-	. initcfg.sh
-else
-	cd ./scripts/
-	if [ -e initcfg.sh ]; then 
-		. initcfg.sh
-	else
-		exit 1
-	fi
-fi
+#################initGn01#######################
+
+###USERS###
+
+###ADMIN###
+userAdmin="admin"               #userName
+passAdmin="admin"               #userPw
+groupsAdmin[0]="sudo"   #userGroups
+groupsAdmin[1]="dialout"
+
+###RBE###
+userRbe="rbe"                   #userName, xcsor user
+passRbe="rbe"                   #userPw
+groupsRbe[0]="sudo"             #userGroups
+groupsRbe[1]="video"
+groupsRbe[2]="dialout"  #rs232
+groupsRbe[3]="mali"             #gpu
+groupsRbe[4]="mice"             #mice
+groupsRbe[5]="ump"              #
+groupsRbe[6]="netdev"   #net
 
 
+###PACKETEStoINSTALL###
+P="rsync "
+P+="firmware-linux-nonfree "
+#P+="libcurl3 "              #xcsore-dep
+#P+="libjpeg8 "              #...
+#P+="libpng12-0 "              #...
+#P+="ttf-dejavu "              #...
+P+="stow "                    #...
+P+="locales "
+P+="ssh "
+P+="htop "
+P+="console-common "
+P+="udev "
+P+="netbase "
+P+="ifupdown "
+P+="isc-dhcp-client "
+#P+="resolvconf "
+P+="sudo "
+P+="systemd "
+P+="systemd-sysv "
+P+="vim "
+P+="net-tools "
 
-. ./initcfg.sh
+
+###INITPATHS###
+IDEB="/root/deb"
+
+CLEANUP="false" #clean up image
+##################initGn01#END####################
 
 echo "initBaseSystem"
 
 #initBaseSystem
+echo "debootstrap"
 [ -x "/debootstrap/debootstrap" ] && /debootstrap/debootstrap --second-stage
 
 ##system einrichten und so 	
 apt-get update
-apt-get upgrade
-apt-get dist-upgrade					#update all
-apt-get install $PACKLIST				#install packetses
+apt-get upgrade -y
+apt-get dist-upgrade -y					#update all
+#apt-get install -y  $P				#install packetses
+
+for i in ${P}; do apt-get install -y $i; done
 
 if [ -e ${IDEB} ]; then
 	dpkg --install ${IDEB}/*.deb
@@ -56,7 +95,7 @@ ldconfig
 
 if [ ${CLEANUP} == "true" ]; then
 	rm -rf ${IDEB} #rm deb dir
-	rm -f /root/config.sh root/initGn.sh
+	rm -f /root/initGn.sh
 fi
 
 exit 0; 	

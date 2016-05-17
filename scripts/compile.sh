@@ -1,20 +1,18 @@
 #!/bin/bash
 
-[ -x ./config.sh ] && . ./config.sh
-
 
 #TODO KernelToBoot()
 #TODO ModulToRoot()
 
 
 kernelMenueConfig() { #make menueconfig
-	info "menueConfig"
+	echo "menueConfig"
 	cd ${SRCKERNEL}
 	make ARCH=arm menuconfig
 }
 
 KernelCompile() { #compile kernel
-	info "KernelCompile"
+	echo "KernelCompile"
 	cd ${SRCKERNEL}
 	make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j7
 }
