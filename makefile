@@ -13,9 +13,6 @@ export DEFAULTEDITOR=vim#       #default editor
 
 export CLEARROOT=false#  #clear root when making new $root " -mr "
 
-#PATHS
-export MNTROOT=/mnt/root#             	#root mount point
-export MNTBOOT=/mnt/boot#		#boot mount point
 
 export WORK=/home/florian/GN02#         #work dir
 export IMAGE=${WORK}/image#            	#image dir
@@ -30,6 +27,9 @@ export RES=${WORK}/res#                 #resorces
 export DEB=${RES}/deb#                  #.deb for auto install 
 export FILES=${RES}/files#              #fils to install z.b. sudoers
 export LIB=${RES}/lib#                  #mali .so fils z.b. Mali.so, libEGL.so
+
+export MNTROOT=${WORK}/mnt/root#             	#root mount point
+export MNTBOOT=${WORK}/mnt/boot#		#boot mount point
 
 #PATHS to FILS
 export IMG=${IMAGE}/gn01.img#
@@ -52,8 +52,7 @@ chrootSD: mountall
 	@echo "TODO"
 	exit 0
 	${SC}/lib/chroot.sh ${MNTROOT}
-mkSD: fdisk
-	cptosd ${SD}
+mkSD: partSD syncToSD
 
 clean:
 	@rm -rf ./root/*
@@ -62,18 +61,18 @@ mkimg:
 	@echo "TODO"
 
 mountall: umountall
-	@echo "TODO"
+	${SC}/mount.sh
 
 umountall:
-	@echo "umount all"
 	${SC}/umount.sh
 
-fdisk: umountall
-	@echo fdisk
-	${SC}/fDisk.sh ${SD}
+partSD: umountall
+	${SC}/part.sh ${SD}
+	mkfs.ext4 ${ROOTBD}
+	mkfs.vfat ${BOOTBD}
 
-cptosd:
-	@echo "TODO"
+syncToSD: mountall
+	${SC}/syncToSD.sh
 
 help:
 	@echo "TODO"

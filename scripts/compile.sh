@@ -30,8 +30,8 @@ editScriptBin(){
 
 editScriptBinSD(){
 	TDEV=$1
-	mountDev ${TDEV} ${MNTBOOT}
+	./mount.sh
 	editScriptBin ${MNTBOOT}
-	umountDev ${TDEV} ${MNTBOOT}
+	./umount.sh
 	unset TDEV	
 }

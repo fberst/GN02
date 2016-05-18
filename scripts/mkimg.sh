@@ -1,7 +1,7 @@
 #!/bin/bash
 
 makeImage() { #creat's .img file to dd on sd
-	info "makeImage"
+	echo "makeImage"
 	#IMAGESIZE="2000M" #set image size to 2GB
 	BOOTSIZE=100000000
 	IMAGESIZE=$(($(du -s ${ROOT} | cut -d'	' -f1) +$BOOTSIZE + 100000000))
