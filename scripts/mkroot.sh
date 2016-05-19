@@ -17,7 +17,8 @@ cd ${SCRIPTS}
 echo "makeBaseSystem"	
 
 
-if [[ $CLEARROOT == "true" ]]; then
+if [[ $CLEARROOT == "true" -o ! -d ${ROOT}/usr  ]]; then
+	mkdir -p ${ROOT}
 	rm -rf ${ROOT}/* #clear $root
 	#make new min root 
 	sudo debootstrap --verbose --arch $ARCH --variant=minbase --foreign $SUITE ${ROOT}/ http://ftp.debian.org/debian
@@ -57,16 +58,16 @@ if [ -e ${FILES}"/sources.list" ]; then
 fi
 
 #autologin
-#if [ -e ${FILES}"/autologin.conf" ]; then
-#	mkdir -p ${ROOT}"/etc/systemd/system/getty@tty1.service.d 
-#	cp -r ${FILES}"/autologin.conf" ${ROOT}"/etc/systemd/system/getty@tty1.service.d/autologin.conf"
-#	[ $? != 0 ] && error "cant install autologin.conf"
-#fi
+if [ -e ${FILES}"/autologin.conf" ]; then
+	mkdir -p ${ROOT}"/etc/systemd/system/getty@tty1.service.d"
+	cp -r ${FILES}"/autologin.conf" ${ROOT}"/etc/systemd/system/getty@tty1.service.d/autologin.conf"
+	[ $? != 0 ] && error "cant install autologin.conf"
+fi
 
 #bashrc witch auto exec xcsore 
-#if [ -e ${FILES}"/bashrc" ]; then
-#	cp ${FILES}"/bashrc" ${ROOT}"/home/rbe/bashrc"
-#fi
+if [ -e ${FILES}"/bashrc" ]; then
+	cp ${FILES}"/bashrc" ${ROOT}"/home/rbe/bashrc"
+fi
 
 #installing mali && EGL && GL lib's
 if [ -e ${LIB} ]; then 
