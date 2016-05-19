@@ -16,8 +16,7 @@ cd ${SCRIPTS}
 
 echo "makeBaseSystem"	
 
-
-if [[ $CLEARROOT == "true" -o ! -d ${ROOT}/usr  ]]; then
+if [ $CLEARROOT == "true" -o ! -d ${ROOT}/usr  ]; then
 	mkdir -p ${ROOT}
 	rm -rf ${ROOT}/* #clear $root
 	#make new min root 

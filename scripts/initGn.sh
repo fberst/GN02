@@ -7,12 +7,14 @@
 ###ADMIN###
 userAdmin="admin"               #userName
 passAdmin="admin"               #userPw
+shellAdmin="/bin/bash"		#shell
 groupsAdmin[0]="sudo"   #userGroups
 groupsAdmin[1]="dialout"
 
 ###RBE###
 userRbe="rbe"                   #userName, xcsor user
 passRbe="rbe"                   #userPw
+shellRbe="/bin/bash"		#shell
 groupsRbe[0]="sudo"             #userGroups
 groupsRbe[1]="video"
 groupsRbe[2]="dialout"  #rs232
@@ -20,7 +22,6 @@ groupsRbe[3]="mali"             #gpu
 groupsRbe[4]="mice"             #mice
 groupsRbe[5]="ump"              #
 groupsRbe[6]="netdev"   #net
-
 
 ###PACKETEStoINSTALL###
 P="rsync "
@@ -44,6 +45,12 @@ P+="systemd "
 P+="systemd-sysv "
 P+="vim "
 P+="net-tools "
+P+="bash-completion "
+P+="locales "
+P+="gcc "
+P+="dialog"
+P+="sunxi-tools "
+P+="tar "
 
 
 ###INITPATHS###
@@ -55,7 +62,6 @@ CLEANUP="false" #clean up image
 echo "initBaseSystem"
 
 #initBaseSystem
-echo "debootstrap"
 [ -x "/debootstrap/debootstrap" ] && /debootstrap/debootstrap --second-stage
 
 ##system einrichten und so 	
@@ -64,7 +70,7 @@ apt-get upgrade -y
 apt-get dist-upgrade -y					#update all
 #apt-get install -y  $P				#install packetses
 
-for i in ${P}; do apt-get install -y $i; done
+for i in ${P}; do echo $i; apt-get install -y $i; done
 
 if [ -e ${IDEB} ]; then
 	dpkg --install ${IDEB}/*.deb
@@ -72,21 +78,21 @@ if [ -e ${IDEB} ]; then
 fi
 
 #seting up user admin
-useradd --create-home --user-group --password $passAdmin $userAdmin 
+useradd --create-home --user-group -s ${shellAdmin} --password $passAdmin $userAdmin 
 #seting up user rbe
-useradd --create-home --user-group --password $passRbe $userRbe
+useradd --create-home --user-group -s ${shellRbe} --password $passRbe $userRbe
 
 #add groups
-for group in ${groupsAdmin[@]}; do groupadd $group; done
-for group in ${groupsRbe[@]}; do groupadd $group; done
+for group in ${groupsAdmin[@]}; do groupadd -f $group; done
+for group in ${groupsRbe[@]}; do groupadd -f $group; done
 	
 #add user to groups
 for group in ${groupsAdmin[@]}; do usermod -aG $group $userAdmin; done
 for group in ${groupsRbe[@]}; do usermod -aG $group $userRbe; done
 
-[ -x "/home/rbe/bashrc" ] && mv "/home/rbe/bashrc" "/home/rbe/.bashrc"
+[ -f "/home/rbe/bashrc" ] && mv "/home/rbe/bashrc" "/home/rbe/.bashrc"
 [ $? -eq 1 ] && echo "can't install .bashrc"
-[ -x "/home/rbe/.bashrc" ] && chown rbe:rbe "/home/rbe/.bashrc"
+[ -f "/home/rbe/.bashrc" ] && chown rbe:rbe "/home/rbe/.bashrc"
 
 #sherd lib setup #TODO
 ldconfig		
@@ -98,4 +104,4 @@ if [ ${CLEANUP} == "true" ]; then
 	rm -f /root/initGn.sh
 fi
 
-exit 0; 	
+exit 0;
