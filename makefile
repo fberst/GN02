@@ -41,18 +41,13 @@ export RP=p2#   #root pard
 SC=${SCRIPTS}
 
 mkroot:
-	@echo "mkroot"
 	${SC}/mkroot.sh
 
 chrootL:
-	@echo "chrootL"
 	${SC}/lib/chroot.sh ${ROOT}
+
 chrootSD: mountall
-	@echo "chroot SD"
-	@echo "TODO"
-	exit 0
 	${SC}/lib/chroot.sh ${MNTROOT}
-mkSD: partSD syncToSD
 
 clean:
 	@rm -rf ./root/*
@@ -66,13 +61,24 @@ mountall: umountall
 umountall:
 	${SC}/umount.sh
 
+mkSD: partSD cpRootToSD installUBootSD installKernel 
+
 partSD: umountall
 	${SC}/part.sh ${SD}
 	mkfs.ext4 ${ROOTBD}
 	mkfs.vfat ${BOOTBD}
 
-syncToSD: mountall
-	${SC}/syncToSD.sh
+cpRootToSD: mountall
+	rsync -avx --delete ${ROOT} ${MNTROOT}
+	sync
+
+installUBootSD: umountall
+	./installu-boot.sh
+
+installKernel: mountall
+	mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
+	cp ${BOOT}/* ${MNTBOOT}
+	sync
 
 help:
 	@echo "TODO"
