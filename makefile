@@ -22,7 +22,7 @@ export SCRIPTS=${WORK}/scripts#         #bscript's to creat image
 export SCRIPTBIN=${SCRIPTS}/scriptBin#  #bin2fex && fex2bin
 export SRC=${WORK}/src#                 #sorcecode
 export SRCKERNEL=${SRC}/kernel/XXXXX# 	#kernel src #TODO
-export SRCUBOOT=${SRC}/uBoot/XXXXX#   	#uBoot src #TODO
+export SRCUBOOT=${SRC}/u-boot#   	#uBoot src #TODO
 export RES=${WORK}/res#                 #resorces
 export DEB=${RES}/deb#                  #.deb for auto install 
 export FILES=${RES}/files#              #fils to install z.b. sudoers
@@ -79,6 +79,9 @@ installKernel: mountall
 	mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
 	cp ${BOOT}/* ${MNTBOOT}
 	sync
+
+mkUboot:
+	${SC}/updateU-Boot.sh
 
 help:
 	@echo "TODO"

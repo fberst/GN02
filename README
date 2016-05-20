@@ -5,8 +5,8 @@ email: frassl@gmx.de
 
 GN02:
 |-->mnt				mount point for sdcard
-    |-->boot		mount point for sd boot 
-    |-->root		mount point for sd root
+    |-->boot			mount point for sd boot 
+    |-->root			mount point for sd root
 |-->boot:			boot files.
 |-->image:			.img files.
 |-->res:			resorces
@@ -15,7 +15,7 @@ GN02:
     |-->picture:		picture to use.
     |-->xcsor:			xcsor data.
 |-->root:			root system.
-|-->scripts:		scripts, libs and bins.
+|-->scripts:			scripts, libs and bins.
 |-->src:			socecode for linux, mali and uBoot.
 
 
