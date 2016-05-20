@@ -2,6 +2,13 @@
 
 echo "testScript"
 
+trap free 2
+echo "XX"
+sleep 10
+echo "##"
+
+exit 0
+
 DEV=/dev/loop1p1
 MNT=/mnt
 

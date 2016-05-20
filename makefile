@@ -44,10 +44,10 @@ mkroot:
 	${SC}/mkroot.sh
 
 chrootL:
-	${SC}/lib/chroot.sh ${ROOT}
+	${SC}/chroot.sh ${ROOT}
 
 chrootSD: mountall
-	${SC}/lib/chroot.sh ${MNTROOT}
+	${SC}/chroot.sh ${MNTROOT}
 
 clean:
 	@rm -rf ./root/*
