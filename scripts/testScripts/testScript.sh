@@ -2,6 +2,18 @@
 
 echo "testScript"
 
+tx=(
+1 #test
+2
+3
+4
+5
+)
+
+echo ${tx[@]}
+
+exit 0
+
 trap free 2
 echo "XX"
 sleep 10

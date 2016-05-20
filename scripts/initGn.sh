@@ -24,33 +24,36 @@ groupsRbe[5]="ump"              #
 groupsRbe[6]="netdev"   #net
 
 ###PACKETEStoINSTALL###
-P="rsync "
-P+="firmware-linux-nonfree "
-#P+="libcurl3 "              #xcsore-dep
-#P+="libjpeg8 "              #...
-#P+="libpng12-0 "              #...
-#P+="ttf-dejavu "              #...
-P+="stow "                    #...
-P+="locales "
-P+="ssh "
-P+="htop "
-P+="console-common "
-P+="udev "
-P+="netbase "
-P+="ifupdown "
-P+="isc-dhcp-client "
-#P+="resolvconf "
-P+="sudo "
-P+="systemd "
-P+="systemd-sysv "
-P+="vim "
-P+="net-tools "
-P+="bash-completion "
-P+="locales "
-P+="gcc "
-P+="dialog"
-P+="sunxi-tools "
-P+="tar "
+PLIST=(
+"rsync "
+"firmware-linux-nonfree "
+#"libcurl3 "              #xcsore-dep
+#"libjpeg8 "              #...
+#"libpng12-0 "            #...
+#"ttf-dejavu "            #...
+"stow "                   #...
+"locales "
+"ssh "
+"htop "
+"console-common "
+"udev "
+"netbase "
+"ifupdown "
+"isc-dhcp-client "
+#"resolvconf "
+"sudo "
+"systemd "
+"systemd-sysv "
+"vim "
+"net-tools "
+"bash-completion "
+"locales "
+"gcc "
+"dialog"
+"sunxi-tools "
+"tar "
+)
+
 
 
 ###INITPATHS###
@@ -70,7 +73,7 @@ apt-get upgrade -y
 apt-get dist-upgrade -y					#update all
 #apt-get install -y  $P				#install packetses
 
-for i in ${P}; do echo $i; apt-get install -y $i; done
+for i in ${PLIST[@]}; do echo $i; apt-get install -y $i; done
 
 if [ -e ${IDEB} ]; then
 	dpkg --install ${IDEB}/*.deb

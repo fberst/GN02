@@ -50,7 +50,7 @@ chrootSD: mountall
 	${SC}/chroot.sh ${MNTROOT}
 
 clean:
-	@rm -rf ./root/*
+	rm -rf ./root/*
 	
 mkimg:
 	@echo "TODO"
