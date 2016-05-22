@@ -2,7 +2,7 @@
 
 if [ ! -d ${SRCKERNEL}/.git ]; then
   cd ${SRC}
-  git clone -b sunxi-3.4 --depth 1 https://github.com/linux-sunxi/linux-sunxi.git
+  git clone -b sunxi-3.4 --depth 1 https://github.com/linux-sunxi/linux-sunxi.git || exit 1
 fi
 cd ${SRCKERNEL}
 git pull
