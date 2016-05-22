@@ -69,7 +69,7 @@ partSD: umountall
 	mkfs.vfat ${BOOTBD}
 
 cpRootToSD: mountall
-	rsync -avx --delete ${ROOT} ${MNTROOT}
+	rsync -avx --delete ${ROOT}/ ${MNTROOT}
 	sync
 
 installUBootSD: umountall
