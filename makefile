@@ -78,7 +78,10 @@ installUBootSD: umountall
 installKernel: mountall
 	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
 	cp ${BOOT}/uImage ${MNTBOOT}/uImage
-	cp ${BOOT}/boot.c
+	cp ${BOOT}/boot.cmd ${MNTBOOT}/
+	cp ${BOOT}/boot.scr ${MNTBOOT}/
+	cp ${BOOT}/script.bin ${MNTBOOT}/
+	chown -R root:root ${BOOT}
 	sync
 
 mkUboot:
