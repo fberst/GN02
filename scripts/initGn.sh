@@ -57,7 +57,7 @@ PLIST=(
 "u-boot-tools"
 "make"
 "g++"
-
+"libncurses5-dev"
 )
 
 
