@@ -22,7 +22,4 @@ cp ${SRCUBOOT}/u-boot-sunxi-with-spl.bin ${BOOT}/sunxi-spl.bin
 cp ${SRCUBOOT}/u-boot.bin ${BOOT}/u-boot.bin
 cp ${SRCUBOOT}/.config ${BOOT}/u-boot-config
 
-mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.scr
-
-
 #dd if=u-boot-sunxi-with-spl.bin of=/dev/sdX bs=1024 seek=8
