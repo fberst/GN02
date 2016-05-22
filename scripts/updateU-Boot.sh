@@ -19,7 +19,6 @@ make CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 make CROSS_COMPILE=arm-linux-gnueabihf-
 
 cp ${SRCUBOOT}/u-boot-sunxi-with-spl.bin ${BOOT}/sunxi-spl.bin
-cp ${SRCUBOOT}/u-boot.bin ${BOOT}/u-boot.bin
 cp ${SRCUBOOT}/.config ${BOOT}/u-boot-config
 
 #dd if=u-boot-sunxi-with-spl.bin of=/dev/sdX bs=1024 seek=8

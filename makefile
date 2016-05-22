@@ -73,7 +73,8 @@ cpRootToSD: mountall
 	sync
 
 installUBootSD: umountall
-	${SC}/installu-boot.sh
+	[ -b ${SD} ] || exit 1
+	dd if=${BOOT}/sunxi-spl.bin of=${SD} bs=1024 seek=8 
 
 installKernel: mountall
 	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
