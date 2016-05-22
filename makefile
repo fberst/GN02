@@ -76,7 +76,7 @@ installUBootSD: umountall
 	${SC}/installu-boot.sh
 
 installKernel: mountall
-	mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
+	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
 	cp ${BOOT}/uImage ${MNTBOOT}/uImage
 	cp ${BOOT}/boot.c
 	sync
