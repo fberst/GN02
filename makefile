@@ -73,7 +73,7 @@ cpRootToSD: mountall
 	sync
 
 installUBootSD: umountall
-	./installu-boot.sh
+	${SC}/installu-boot.sh
 
 installKernel: mountall
 	mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
