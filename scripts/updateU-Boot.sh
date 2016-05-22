@@ -15,8 +15,8 @@ cd ${SRCUBOOT}
 git pull
 make clean
 [ -f ${SRCUBOOT}/.config ] || make CROSS_COMPILE=arm-linux-gnueabihf- Cubieboard2_defconfig
-make CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
-make CROSS_COMPILE=arm-linux-gnueabihf-
+make CROSS_COMPILE=arm-linux-gnueabihf- menuconfig || exit 1
+make -j$(nproc) CROSS_COMPILE=arm-linux-gnueabihf- || exit 1
 
 cp ${SRCUBOOT}/u-boot-sunxi-with-spl.bin ${BOOT}/sunxi-spl.bin
 cp ${SRCUBOOT}/.config ${BOOT}/u-boot-config
