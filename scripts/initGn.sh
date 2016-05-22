@@ -25,33 +25,39 @@ groupsRbe[6]="netdev"   #net
 
 ###PACKETEStoINSTALL###
 PLIST=(
-"rsync "
-"firmware-linux-nonfree "
-#"libcurl3 "              #xcsore-dep
-#"libjpeg8 "              #...
-#"libpng12-0 "            #...
-#"ttf-dejavu "            #...
-"stow "                   #...
-"locales "
-"ssh "
-"htop "
-"console-common "
-"udev "
-"netbase "
-"ifupdown "
-"isc-dhcp-client "
-#"resolvconf "
-"sudo "
-"systemd "
-"systemd-sysv "
-"vim "
-"net-tools "
-"bash-completion "
-"locales "
-"gcc "
+"apt-utils"
+"rsync"
+"firmware-linux-nonfree"
+#"libcurl3"              #xcsore-dep
+#"libjpeg8"              #...
+#"libpng12-0"            #...
+#"ttf-dejavu"            #...
+#"stow"                   #...
+"locales"
+"ssh"
+"htop"
+"console-common"
+"udev"
+"netbase"
+"ifupdown"
+"isc-dhcp-client"
+#"resolvconf"
+"sudo"
+"systemd"
+"systemd-sysv"
+"vim"
+"net-tools"
+"bash-completion"
+"locales"
+"gcc"
 "dialog"
-"sunxi-tools "
-"tar "
+"sunxi-tools"
+"tar"
+"gzip"
+"u-boot-tools"
+"make"
+"g++"
+
 )
 
 
@@ -73,7 +79,7 @@ apt-get upgrade -y
 apt-get dist-upgrade -y					#update all
 #apt-get install -y  $P				#install packetses
 
-for i in ${PLIST[@]}; do echo $i; apt-get install -y $i; done
+for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
 
 if [ -e ${IDEB} ]; then
 	dpkg --install ${IDEB}/*.deb
