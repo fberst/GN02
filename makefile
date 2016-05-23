@@ -53,6 +53,9 @@ chrootL:
 chrootSD: mountall
 	${SC}/chroot.sh ${MNTROOT}
 
+chrootBuildfs:
+	${SC}/chroot.sh ${BUILDFS}
+
 clean:
 	rm -rf ./root/*
 	

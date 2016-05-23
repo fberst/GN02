@@ -8,20 +8,24 @@
 userAdmin="admin"               #userName
 passAdmin="admin"               #userPw
 shellAdmin="/bin/bash"		#shell
-groupsAdmin[0]="sudo"   #userGroups
-groupsAdmin[1]="dialout"
+groupsAdmin=(
+"sudo"   #userGroups
+"dialout"
+)
 
 ###RBE###
 userRbe="rbe"                   #userName, xcsor user
 passRbe="rbe"                   #userPw
 shellRbe="/bin/bash"		#shell
-groupsRbe[0]="sudo"             #userGroups
-groupsRbe[1]="video"
-groupsRbe[2]="dialout"  #rs232
-groupsRbe[3]="mali"             #gpu
-groupsRbe[4]="mice"             #mice
-groupsRbe[5]="ump"              #
-groupsRbe[6]="netdev"   #net
+groupsRbe=(
+"sudo"             #userGroups
+"video"
+"dialout"  #rs232
+"mali"             #gpu
+"mice"             #mice
+"ump"              #
+"netdev"   #net
+)
 
 ###PACKETEStoINSTALL###
 PLIST=(

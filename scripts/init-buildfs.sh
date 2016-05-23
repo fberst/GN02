@@ -8,8 +8,10 @@
 userAdmin="admin"               #userName
 passAdmin="admin"               #userPw
 shellAdmin="/bin/bash"		#shell
-groupsAdmin[0]="sudo"   #userGroups
-groupsAdmin[1]="dialout"
+groupsAdmin=(
+"sudo"   #userGroups
+"dialout"
+)
 
 ###PACKETEStoINSTALL###
 PLIST=(

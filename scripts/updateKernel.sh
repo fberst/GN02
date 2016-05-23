@@ -6,7 +6,6 @@ if [ ! -d ${SRCKERNEL}/.git ]; then
 fi
 cd ${SRCKERNEL}
 git pull
-echo "#include <linux/compiler-gcc4.h>" > ${SRCKERNEL}/include/linux/compiler-gcc5.h
 
 exit 0
 #to cp boot scren to kernel src
