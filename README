@@ -14,7 +14,8 @@ GN02:
     |-->lib:			libs to install. libEGL.so ...
     |-->picture:		picture to use.
     |-->xcsor:			xcsor data.
-|-->root:			root system.
+|-->rootifs:			root system.
+|-->buildfs:			build system for kernel
 |-->scripts:			scripts, libs and bins.
 |-->src:			socecode for linux, mali and uBoot.
 

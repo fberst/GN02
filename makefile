@@ -96,7 +96,8 @@ mk_Uboot:
 mk_Kernel:
 	${SC}/updateKernel.sh
 help:
-	@echo "TODO"
-
-
+	@echo "mk_rootfs	to create an root fs at ${ROOT}"
+	@echo "mk_buildfs	to create an build fs " 
+	@echo "mountall		mounts boot and root part. to mnt{boot:root}"
+	@echo "umountrall	umounts all part. on SD"
 

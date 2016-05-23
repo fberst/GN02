@@ -24,7 +24,7 @@ if [ ! -d ${BUILDFS}/usr  ]; then
 fi
 
 
-cp ${SCRIPTS}"/init-rootfs.sh" ${BUILDFS}"/root/init-rootfs.sh"	#cp this script to newRoot
+cp ${SCRIPTS}"/init-buildfs.sh" ${BUILDFS}"/root/init-buildfs.sh"	#cp this script to newRoot
 	
 #installing fils
 
