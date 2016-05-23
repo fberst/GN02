@@ -10,7 +10,7 @@ cd "/home/admin/" || exit 1
 if [ ! -d ${SRCK}/.git ]; then
   git clone -b sunxi-3.4 --depth 1 https://github.com/linux-sunxi/linux-sunxi.git || exit 1
 fi
-cd ${SRCKERNEL}
+cd ${SRCK}
 git pull
 
 #to cp boot scren to kernel src
@@ -19,10 +19,10 @@ git pull
 
 [ $CLEAN -eq 1 ] && make clean
 
-[ -f ${SRCK}/.config ] || make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- sun7i_defconfig
-[ $MCONF -eq 1 ] && make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+[ -f ${SRCK}/.config ] || make  sun7i_defconfig
+[ $MCONF -eq 1 ] && make  menuconfig
 make -j$(nproc) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage modules || exit 1
-make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=output modules_install
+make INSTALL_MOD_PATH=output modules_install
 
 #arch/arm/boot/uImage		#kernel
 #output/lib/modules/3.4.XXX/	#moduls 

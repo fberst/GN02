@@ -16,8 +16,13 @@ function chrootUmountAll { #umount all staf from chroot
 
 }
 	
-[ -z $1 ] || [ $UID -ne 0 ] && echo "error chroot" && exit 1
+[ -z $1 -o  $UID -ne 0 ] && echo "error chroot" && exit 1
 chrootMountAll $1
-chroot $*
+if [ ! -z $3 ]; then
+  echo "debug info $3"
+  chroot --userspec=$3 $1 $2 
+else
+  chroot $1 $2
+fi
 chrootUmountAll $1
 
