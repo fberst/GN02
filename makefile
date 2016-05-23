@@ -17,7 +17,7 @@ export CLEARROOT=false#  #clear root when making new $root " -mr "
 export WORK=/home/florian/GN02#         #work dir
 export IMAGE=${WORK}/image#            	#image dir
 export BOOT=${WORK}/boot#               #boot data z.b. uImage ..
-export ROOT=${WORK}/root#               #local root dir
+export ROOT=${WORK}/rootfs#               #local root dir
 export SCRIPTS=${WORK}/scripts#         #bscript's to creat image
 export SCRIPTBIN=${SCRIPTS}/scriptBin#  #bin2fex && fex2bin
 export SRC=${WORK}/src#                 #sorcecode
@@ -40,8 +40,8 @@ export RP=p2#   #root pard
 
 SC=${SCRIPTS}
 
-mkroot:
-	${SC}/mkroot.sh
+mk_rootfs:
+	${SC}/mk-rootfs.sh
 
 chrootL:
 	${SC}/chroot.sh ${ROOT}
@@ -52,7 +52,7 @@ chrootSD: mountall
 clean:
 	rm -rf ./root/*
 	
-mkimg:
+mk_img:
 	@echo "TODO"
 
 mountall: umountall
@@ -61,7 +61,7 @@ mountall: umountall
 umountall:
 	${SC}/umount.sh
 
-mkSD: partSD cpRootToSD installUBootSD installKernel 
+mk_SD: partSD cpRootToSD installUBootSD installKernel 
 
 partSD: umountall
 	${SC}/part.sh ${SD}
@@ -86,10 +86,10 @@ installKernel: mountall
 	chown -R root:root ${BOOT}
 	sync
 
-mkUboot:
+mk_Uboot:
 	${SC}/updateU-Boot.sh
 
-mkKernel:
+mk_Kernel:
 	${SC}/updateKernel.sh
 help:
 	@echo "TODO"

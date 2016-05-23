@@ -1,22 +1,5 @@
 #!/bin/bash
 
-
-#TODO KernelToBoot()
-#TODO ModulToRoot()
-
-
-kernelMenueConfig() { #make menueconfig
-	echo "menueConfig"
-	cd ${SRCKERNEL}
-	make ARCH=arm menuconfig
-}
-
-KernelCompile() { #compile kernel
-	echo "KernelCompile"
-	cd ${SRCKERNEL}
-	make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j7
-}
-
 editScriptBin(){
 	TBOOT=$1
 	${SCRIPTBIN}"/bin2fex" ${TBOOT}"/script.bin" ${TBOOT}"/script.fex"

@@ -110,7 +110,7 @@ ldconfig
 
 if [ ${CLEANUP} == "true" ]; then
 	rm -rf ${IDEB} #rm deb dir
-	rm -f /root/initGn.sh
+	rm -f /root/init-rootfs.sh
 fi
 
 exit 0;

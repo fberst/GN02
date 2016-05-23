@@ -24,7 +24,7 @@ if [ $CLEARROOT == "true" -o ! -d ${ROOT}/usr  ]; then
 fi
 
 
-cp ${SCRIPTS}"/initGn.sh" ${ROOT}"/root/initGn.sh"	#cp this script to newRoot
+cp ${SCRIPTS}"/init-rootfs.sh" ${ROOT}"/root/init-rootfs.sh"	#cp this script to newRoot
 	
 #cp driver staf to root and install mali driver #TODO
 	
@@ -79,6 +79,6 @@ rm -f ${ROOT}"/etc/modules"
 if [ -e ${FILES}"/modules" ]; then
 	cp ${FILES}"/modules" ${ROOT}"/etc/modules"
 	chown root:root ${ROOT}"/etc/modules"
-fi
+	fi
 
-./chroot.sh $ROOT/ "/root/initGn.sh"  #ecec this script on newRoot
+./chroot.sh $ROOT/ "/root/init-rootfs.sh"  #ecec this script on newRoot
