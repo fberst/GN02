@@ -74,14 +74,14 @@ mountall: umountall
 umountall:
 	${SC}/umount.sh
 
-mk_SD: partSD cpRootToSD installUBootSD installKernel 
+mk_SD: partSD cpRootfsToSD installUBootSD installKernel 
 
 partSD: umountall
 	${SC}/part.sh ${SD}
 	mkfs.ext4 ${ROOTBD}
 	mkfs.vfat ${BOOTBD}
 
-cpRootToSD: mountall
+cpRootfsToSD: mountall
 	rsync -avx --delete ${ROOT}/ ${MNTROOT}
 	sync
 
@@ -105,8 +105,14 @@ mk_Uboot:
 mk_Kernel:
 	${SC}/updateKernel.sh
 help:
-	@echo "mk_rootfs	to create an root fs at ${ROOT}"
-	@echo "mk_buildfs	to create an build fs " 
-	@echo "mountall		mounts boot and root part. to mnt{boot:root}"
-	@echo "umountrall	umounts all part. on SD"
-
+	@echo "all functions listed hier are tested more ore less"
+	@echo "mk_rootfs		to create an root fs at ${ROOT}"
+	@echo "mk_buildfs		to create an build fs " 
+	@echo "mountall			mounts boot and root part. to mnt{boot:root}"
+	@echo "umountrall		umounts all part. on SD" 
+	@echo "chrootL			chroot to local rootfs"
+	@echo "chrootSD			chroot to ${SD}p2"
+	@echo "chrootBuildfs	chroot to buildfs"
+	@echo "cpRootfsToSD		self expaining"
+	@echo "partSD			parts sdcart"
+	@echo ""
