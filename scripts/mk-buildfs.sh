@@ -47,4 +47,4 @@ if [ -e ${FILES}"/autologin.conf" ]; then
 	[ $? != 0 ] && error "cant install autologin.conf"
 fi
 
-./chroot.sh ${BUILDFS}/ "/root/init-buildfs.sh"  #ecec this script on newRoot
+./chroot.sh ${BUILDFS} "/root/init-buildfs.sh"  #ecec this script on newRoot

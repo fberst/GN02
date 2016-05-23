@@ -81,4 +81,4 @@ if [ -e ${FILES}"/modules" ]; then
 	chown root:root ${ROOT}"/etc/modules"
 	fi
 
-./chroot.sh $ROOT/ "/root/init-rootfs.sh"  #ecec this script on newRoot
+./chroot.sh $ROOT "/root/init-rootfs.sh"  #ecec this script on newRoot
