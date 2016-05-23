@@ -1,4 +1,6 @@
 #ignore "rootfs"
-root/
+rootfs/
+
+buildfs/
 
 src/*

@@ -17,7 +17,8 @@ export CLEARROOT=false#  #clear root when making new $root " -mr "
 export WORK=/home/florian/GN02#         #work dir
 export IMAGE=${WORK}/image#            	#image dir
 export BOOT=${WORK}/boot#               #boot data z.b. uImage ..
-export ROOT=${WORK}/rootfs#               #local root dir
+export ROOT=${WORK}/rootfs#    		#local root dir
+export BUILDFS=${WORK}/buildfs#		#build fs
 export SCRIPTS=${WORK}/scripts#         #bscript's to creat image
 export SCRIPTBIN=${SCRIPTS}/scriptBin#  #bin2fex && fex2bin
 export SRC=${WORK}/src#                 #sorcecode
@@ -42,6 +43,9 @@ SC=${SCRIPTS}
 
 mk_rootfs:
 	${SC}/mk-rootfs.sh
+
+mk_buildfs:
+	${SC}/mk-buildfs.sh
 
 chrootL:
 	${SC}/chroot.sh ${ROOT}
