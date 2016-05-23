@@ -18,6 +18,6 @@ function chrootUmountAll { #umount all staf from chroot
 	
 [ -z $1 ] || [ $UID -ne 0 ] && echo "error chroot" && exit 1
 chrootMountAll $1
-chroot $1 $2
+chroot $*
 chrootUmountAll $1
 
