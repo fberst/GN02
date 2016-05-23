@@ -28,6 +28,7 @@ export RES=${WORK}/res#                 #resorces
 export DEB=${RES}/deb#                  #.deb for auto install 
 export FILES=${RES}/files#              #fils to install z.b. sudoers
 export LIB=${RES}/lib#                  #mali .so fils z.b. Mali.so, libEGL.so
+export PIC=${RES}/picture#		#pictures
 
 export MNTROOT=${WORK}/mnt/root#             	#root mount point
 export MNTBOOT=${WORK}/mnt/boot#		#boot mount point
@@ -58,6 +59,7 @@ chrootBuildfs:
 
 mk_kernel_in_buildfs:
 	cp ${SC}/mk-kernel-in-buildfs.sh ${BUILDFS}/home/admin/mk-kernel-in-buildfs.sh
+	cp ${PIC}/gnBoot_logo_ascii_224.ppm ${BUILDFS}/home/admin/
 	${SC}/chroot.sh ${BUILDFS} "/home/admin/mk-kernel-in-buildfs.sh" admin:admin
 
 clean:

@@ -10,6 +10,8 @@ cd "/home/admin/" || exit 1
 if [ ! -d ${SRCK}/.git ]; then
   git clone -b sunxi-3.4 --depth 1 https://github.com/linux-sunxi/linux-sunxi.git || exit 1
 fi
+
+cp gnBoot_logo_ascii_224.ppm ./linux-sunxi/drivers/video/logo/logo_linux_clut224.ppm
 cd ${SRCK}
 git pull
 
