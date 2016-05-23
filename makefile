@@ -55,6 +55,9 @@ chrootSD: mountall
 
 chrootBuildfs:
 	${SC}/chroot.sh ${BUILDFS}
+mk_kernel_in_buildfs:
+	cp ${SC}/mk-kernel-in-buildfs.sh ${BUILDFS}/home/admin/mk-kernel-in-buildfs.sh
+	${SC}/chroot.sh ${BUILDFS} /home/admin/mk-kernel-in-buildfs.sh --userspec=admin:admin
 
 clean:
 	rm -rf ./root/*

@@ -48,6 +48,7 @@ PLIST=(
 "make"
 "g++"
 "libncurses5-dev"
+"git"
 )
 
 
