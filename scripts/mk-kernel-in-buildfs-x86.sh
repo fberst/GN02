@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CLEAN=${CK}
-MCONF=${MCK}
+CLEAN=1
+MCONF=0
 
 SRCK="linux-sunxi"
 
@@ -22,10 +22,10 @@ git pull
 [ $CLEAN -eq 1 ] && make clean
 
 [ -f ${SRCK}/.config ] || make  sun7i_defconfig
-[ $MCONF -eq 1 ] && make  menuconfig
+[ $MCONF -eq 1 ] && make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-  menuconfig
 make -j$(nproc) ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage modules || exit 1
 rm -rf output
-make INSTALL_MOD_PATH=output modules_install
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=output modules_install
 
 cd ../
 mkdir -P out

@@ -40,6 +40,12 @@ export IMG=${IMAGE}/gn01.img#
 export BP=p1#   #boot pard
 export RP=p2#   #root pard
 
+export MCU=false#	menuconfig uboot
+export MCK=false#	menuconfig kernel
+export CK=false#	clean kernel src
+export CU=false#	clean u-boot
+
+
 SC=${SCRIPTS}
 
 mk_rootfs:
@@ -47,6 +53,9 @@ mk_rootfs:
 
 mk_buildfs:
 	${SC}/mk-buildfs.sh
+
+mk_Buildfs-x86:
+	${SC}/mk-buildfs-x86.sh
 
 chrootL:
 	${SC}/chroot.sh ${ROOT}
@@ -57,13 +66,17 @@ chrootSD: mountall
 chrootBuildfs:
 	${SC}/chroot.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
 
+chrootBuildfs-x86:
+	${SC}/chroot-x86.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
+
 mk_kernel_in_buildfs:
 	cp ${SC}/mk-kernel-in-buildfs.sh ${BUILDFS}/home/admin/mk-kernel-in-buildfs.sh
 	cp ${PIC}/gnBoot_logo_ascii_224.ppm ${BUILDFS}/home/admin/
 	${SC}/chroot.sh ${BUILDFS} "/home/admin/mk-kernel-in-buildfs.sh" admin:admin
 
 clean:
-	rm -rf ./root/*
+	rm -rf ./rootfs/*
+	rm -rf ./buildfs/
 	
 mk_img:
 	@echo "TODO"
@@ -87,7 +100,7 @@ cpRootfsToSD: mountall
 
 installUBootSD: umountall
 	[ -b ${SD} ] || exit 1
-	dd if=${BOOT}/sunxi-spl.bin of=${SD} bs=1024 seek=8 
+	dd if=${BOOT}/u-boot-sunxi-with-spl.bin of=${SD} bs=1024 seek=8 
 
 installKernel: mountall
 	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
