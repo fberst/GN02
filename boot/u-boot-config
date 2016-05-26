@@ -382,6 +382,7 @@ CONFIG_CMD_PING=y
 # CONFIG_CMD_TIME is not set
 CONFIG_CMD_MISC=y
 # CONFIG_CMD_TIMER is not set
+# CONFIG_CMD_QFW is not set
 
 #
 # Power commands

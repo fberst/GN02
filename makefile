@@ -29,6 +29,7 @@ export DEB=${RES}/deb#                  #.deb for auto install
 export FILES=${RES}/files#              #fils to install z.b. sudoers
 export LIB=${RES}/lib#                  #mali .so fils z.b. Mali.so, libEGL.so
 export PIC=${RES}/picture#		#pictures
+export MODULES=${WORK}/modules
 
 export MNTROOT=${WORK}/mnt/root#             	#root mount point
 export MNTBOOT=${WORK}/mnt/boot#		#boot mount point
@@ -44,6 +45,7 @@ export MCU=false#	menuconfig uboot
 export MCK=false#	menuconfig kernel
 export CK=false#	clean kernel src
 export CU=false#	clean u-boot
+export UPU=false#	update-u-boot
 
 
 SC=${SCRIPTS}
@@ -104,12 +106,13 @@ installUBootSD: umountall
 
 installKernel: mountall
 	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
-	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.scr
+	#mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.scr
 	cp ${BOOT}/uImage ${MNTBOOT}/uImage
 	cp ${BOOT}/boot.cmd ${MNTBOOT}/
 	cp ${BOOT}/boot.scr ${MNTBOOT}/
 	cp ${BOOT}/script.bin ${MNTBOOT}/
 	chown -R root:root ${BOOT}
+	cp -r ${MODULES}/ ${MNTROOT}/
 	sync
 
 mk_Uboot:

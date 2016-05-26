@@ -37,7 +37,6 @@ PLIST=(
 #"libpng12-0"            #...
 #"ttf-dejavu"            #...
 #"stow"                   #...
-"locales"
 "ssh"
 "htop"
 "console-common"
@@ -82,6 +81,11 @@ apt-get update
 apt-get upgrade -y
 apt-get dist-upgrade -y					#update all
 #apt-get install -y  $P				#install packetses
+
+apt-get install -y locales 
+echo "reconfigur locals? [y/n]"
+read rin
+[ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigur lovales
 
 for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
 

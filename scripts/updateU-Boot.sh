@@ -12,10 +12,10 @@ if [ ! -d ${SRCUBOOT}/.git ]; then
 fi
 
 cd ${SRCUBOOT}
-git pull
+[[ ${UPU} == "true" ]] && git pull
 [[ ${CU} == "true" ]] && make clean
 [ -f ${SRCUBOOT}/.config ] || make CROSS_COMPILE=arm-linux-gnueabihf- Cubieboard2_defconfig
-[[ ${MCU} == "true" ]] make CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+[[ ${MCU} == "true" ]] && make CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 make -j$(nproc) CROSS_COMPILE=arm-linux-gnueabihf- || exit 1
 
 cp ${SRCUBOOT}/u-boot-sunxi-with-spl.bin ${BOOT}/u-boot-sunxi-with-spl.bin
