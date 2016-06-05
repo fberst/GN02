@@ -103,17 +103,18 @@ cpRootfsToSD: mountall
 	rsync -avx --delete ${ROOT}/ ${MNTROOT}
 	sync
 
+install_boot.xxx: ${BOOT}/boot.cmd
+	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.sr
+	cp ${BOOT}/boot.cmd ${MNTBOOT}/
+	cp ${BOOT}/boot.scr ${MNTBOOT}/
+
 installUBootSD: umountall ${BOOT}/boot.cmd
 	[ -b ${SD} ] || exit 1
-	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.sr
 	dd if=${BOOT}/u-boot-sunxi-with-spl.bin of=${SD} bs=1024 seek=8 
 
 installKernel: mountall
 	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
-	
 	cp ${BOOT}/uImage ${MNTBOOT}/uImage
-	cp ${BOOT}/boot.cmd ${MNTBOOT}/
-	cp ${BOOT}/boot.scr ${MNTBOOT}/
 	cp ${BOOT}/script.bin ${MNTBOOT}/
 	chown -R root:root ${BOOT}
 	cp -r ${MODULES}/ ${MNTROOT}/
