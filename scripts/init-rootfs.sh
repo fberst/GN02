@@ -51,16 +51,14 @@ PLIST=(
 "vim"
 "net-tools"
 "bash-completion"
-"locales"
 "gcc"
-"dialog"
-"sunxi-tools"
+#"sunxi-tools"
 "tar"
 "gzip"
-"u-boot-tools"
+#"u-boot-tools"
 "make"
-"g++"
-"libncurses5-dev"
+#"g++"
+#"libncurses5-dev"
 )
 
 
@@ -82,7 +80,7 @@ apt-get upgrade -y
 apt-get dist-upgrade -y					#update all
 #apt-get install -y  $P				#install packetses
 
-apt-get install -y locales 
+apt-get install -y dialog locales 
 echo "reconfigur locals? [y/n]"
 read rin
 [ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigure locales
