@@ -79,6 +79,15 @@ rm -f ${ROOT}"/etc/modules"
 if [ -e ${FILES}"/modules" ]; then
 	cp ${FILES}"/modules" ${ROOT}"/etc/modules"
 	chown root:root ${ROOT}"/etc/modules"
-	fi
+fi
 
+
+cat <<EOT > ${ROOT}/etc/fstab
+/dev/mmcblk0p2  /   ext4  defaults  0 1
+tmpfs /tmp  tmpfs defaults  0 0
+tmpfs /var/tmp  tmpfs defaults  0 0
+#none	/tmp	tmpfs	defaults,noatime,mode=1777 0 0
+# if you have a separate boot partition
+/dev/mmcblk0p1	/boot	vfat defaults 0 0 
+EOT
 ./chroot.sh $ROOT "/root/init-rootfs.sh"  #ecec this script on newRoot
