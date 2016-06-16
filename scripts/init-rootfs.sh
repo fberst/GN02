@@ -85,7 +85,7 @@ apt-get dist-upgrade -y					#update all
 apt-get install -y locales 
 echo "reconfigur locals? [y/n]"
 read rin
-[ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigur lovales
+[ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigure locales
 
 for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
 

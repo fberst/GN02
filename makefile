@@ -92,19 +92,19 @@ mount_all_old_system: umountall
 umountall:
 	${SC}/umount.sh
 
-mk_SD: partSD cpRootfsToSD installUBootSD installKernel 
+mk_SD: partSD cpRootfsToSD installUBootSD installKernel install_boot.xxx 
 
 partSD: umountall
 	${SC}/part.sh ${SD}
-	mkfs.ext4 ${ROOTBD}
+	mkfs.ext3 ${ROOTBD}
 	mkfs.vfat ${BOOTBD}
 
 cpRootfsToSD: mountall
 	rsync -avx --delete ${ROOT}/ ${MNTROOT}
 	sync
 
-install_boot.xxx: ${BOOT}/boot.cmd
-	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.sr
+install_boot.xxx:
+	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.scr
 	cp ${BOOT}/boot.cmd ${MNTBOOT}/
 	cp ${BOOT}/boot.scr ${MNTBOOT}/
 
