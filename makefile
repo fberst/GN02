@@ -116,8 +116,8 @@ installKernel: mountall
 	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
 	cp ${BOOT}/uImage ${MNTBOOT}/uImage
 	cp ${BOOT}/script.bin ${MNTBOOT}/
-	chown -R root:root ${BOOT}
-	cp -r ${MODULES}/ ${MNTROOT}/
+	chown -R root:root ${MNTBOOT}/*
+	cp -r ${MODULES}/* ${MNTROOT}/
 	sync
 
 mk_Uboot:
