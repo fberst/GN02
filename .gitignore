@@ -6,3 +6,5 @@ buildfs/
 src/*
 
 mnt/
+
+boot/boot.scr
