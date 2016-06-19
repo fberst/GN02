@@ -10,11 +10,9 @@ esac
 
 # TTY1 autostart
 if [[ $(tty) == "/dev/tty1" ]]; then 
-	#exec foo
-	#xcsor
-	#bar
 	#poweroff
-	echo "FUCK JA"
+  LANG=de_DE /home/rbe/xcsoar_rbe2 -800x480 -fly -datapath=/home/rbe/XCSoarData
+  #sudo poweroff
 fi
 
 # don't put duplicate lines or lines starting with space in the history.
