@@ -65,6 +65,7 @@ fi
 
 #bashrc witch auto exec xcsore 
 if [ -e ${FILES}"/bashrc" ]; then
+  mkdir -p ${root}"/home/rbe"
 	cp ${FILES}"/bashrc" ${ROOT}"/home/rbe/bashrc"
 fi
 
@@ -83,7 +84,7 @@ fi
 
 
 cat <<EOT > ${ROOT}/etc/fstab
-/dev/mmcblk0p2  /   ext4  defaults  0 1
+/dev/mmcblk0p2  /   ext3  defaults  0 1
 tmpfs /tmp  tmpfs defaults  0 0
 tmpfs /var/tmp  tmpfs defaults  0 0
 #none	/tmp	tmpfs	defaults,noatime,mode=1777 0 0

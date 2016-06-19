@@ -2,7 +2,13 @@
 
 #################initGn01#######################
 
+###hostName###
+HOSTNAME="GN02"
+
 ###USERS###
+
+###root####
+passRoot="GN02"
 
 ###ADMIN###
 userAdmin="admin"               #userName
@@ -39,6 +45,7 @@ PLIST=(
 #"stow"                   #...
 "ssh"
 "htop"
+"kbd"
 "console-common"
 "udev"
 "netbase"
@@ -51,7 +58,7 @@ PLIST=(
 "vim"
 "net-tools"
 "bash-completion"
-"gcc"
+#"gcc"
 #"sunxi-tools"
 "tar"
 "gzip"
@@ -59,6 +66,8 @@ PLIST=(
 "make"
 #"g++"
 #"libncurses5-dev"
+"openssl"
+"kmod"
 )
 
 
@@ -78,7 +87,6 @@ echo "initBaseSystem"
 apt-get update
 apt-get upgrade -y
 apt-get dist-upgrade -y					#update all
-#apt-get install -y  $P				#install packetses
 
 apt-get install -y dialog locales 
 echo "reconfigur locals? [y/n]"
@@ -91,19 +99,22 @@ if [ -e ${IDEB} ]; then
 	dpkg --install ${IDEB}/*.deb
 	[ $? -ne 0 ] && echo "dpkg error $?" exit 1
 fi
+#seting pw for root
+usermod -p $(openssl passwd ${passRoot}) root
 
 #seting up user admin
-useradd --create-home --user-group -s ${shellAdmin} --password $passAdmin $userAdmin 
+useradd --create-home --user-group -s ${shellAdmin} -p $(openssl passwd ${passAdmin}) ${userAdmin} 
+
 #seting up user rbe
-useradd --create-home --user-group -s ${shellRbe} --password $passRbe $userRbe
+useradd --create-home --user-group -s ${shellRbe} -p $(openssl passwd ${passRbe}) ${userRbe}
 
 #add groups
 for group in ${groupsAdmin[@]}; do groupadd -f $group; done
 for group in ${groupsRbe[@]}; do groupadd -f $group; done
 	
 #add user to groups
-for group in ${groupsAdmin[@]}; do usermod -aG $group $userAdmin; done
-for group in ${groupsRbe[@]}; do usermod -aG $group $userRbe; done
+for group in ${groupsAdmin[@]}; do usermod -aG ${group} ${userAdmin}; done
+for group in ${groupsRbe[@]}; do usermod -aG ${group} ${userRbe}; done
 
 [ -f "/home/rbe/bashrc" ] && mv "/home/rbe/bashrc" "/home/rbe/.bashrc"
 [ $? -eq 1 ] && echo "can't install .bashrc"
@@ -112,6 +123,9 @@ for group in ${groupsRbe[@]}; do usermod -aG $group $userRbe; done
 #sherd lib setup #TODO
 ldconfig		
 #xcsore staf	#TODO
+
+#set hostname
+echo ${HOSTNAME} > "/etc/hostname"
 
 
 if [ ${CLEANUP} == "true" ]; then
