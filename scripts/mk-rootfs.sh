@@ -8,8 +8,6 @@ ARCH=armhf
 
 cd ${SCRIPTS}
 
-#[ ! -x lib/chroot.sh ] && echo "lib/chroot.sh not found" && exit 1
-#. lib/chroot.sh
 
 [ ${UID} != 0 ] && echo "I'm not root" && exit 1
 [ -z ${ROOT} ] && echo "'$'root not set" exit 1
@@ -23,12 +21,14 @@ if [ $CLEARROOT == "true" -o ! -d ${ROOT}/usr  ]; then
 	sudo debootstrap --verbose --arch $ARCH --variant=minbase --foreign $SUITE ${ROOT}/ http://ftp.debian.org/debian
 fi
 
-
 cp ${SCRIPTS}"/init-rootfs.sh" ${ROOT}"/root/init-rootfs.sh"	#cp this script to newRoot
 	
-#cp driver staf to root and install mali driver #TODO
-	
-[ -e ${DEB}/* ] && cp -Rv ${DEB}/* ${ROOT}${IDEB}/ #cp .deb to root dir
+IDEB=root/deb/
+#cp .deb to rootfs
+mkdir -p ${ROOT}/${IDEB}
+for deb in $(ls -1 ${DEB}); do cp ${DEB}/${deb} ${ROOT}/${IDEB}; done
+
+#[ -e ${DEB}/* ] && cp -Rv ${DEB}/* ${ROOT}/$IDEB #cp .deb to root dir
 
 #installing fils
 
@@ -82,7 +82,7 @@ if [ -e ${FILES}"/modules" ]; then
 	chown root:root ${ROOT}"/etc/modules"
 fi
 
-
+#install fstab
 cat <<EOT > ${ROOT}/etc/fstab
 /dev/mmcblk0p2  /   ext3  defaults  0 1
 tmpfs /tmp  tmpfs defaults  0 0
@@ -91,4 +91,5 @@ tmpfs /var/tmp  tmpfs defaults  0 0
 # if you have a separate boot partition
 /dev/mmcblk0p1	/boot	vfat defaults 0 0 
 EOT
+
 ./chroot.sh $ROOT "/root/init-rootfs.sh"  #ecec this script on newRoot

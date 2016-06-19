@@ -68,12 +68,13 @@ PLIST=(
 #"libncurses5-dev"
 "openssl"
 "kmod"
+#xcsoar deb's
+"libcurl3"
+"libfreetype6"
+"libjpeg62-turbo"
+"libpng12-0"
+"ttf-dejavu"
 )
-
-
-
-###INITPATHS###
-IDEB="/root/deb"
 
 CLEANUP="false" #clean up image
 ##################initGn01#END####################
@@ -94,6 +95,8 @@ read rin
 [ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigure locales
 
 for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
+
+IDEB="/root/deb"
 
 if [ -e ${IDEB} ]; then
 	dpkg --install ${IDEB}/*.deb
