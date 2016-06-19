@@ -68,6 +68,19 @@ apt-get dist-upgrade -y					#update all
 
 for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
 
+
+#install armhf-gcc
+
+dpkg --add-architecture armhf
+apt-get update
+apt-get install cross-gcc-dev
+#Make sure bash (or zsh) is your default shell or add SHELL:=/bin/bash to 2nd line of /usr/share/cross-gcc/template/rules.generic
+TARGET_LIST="armhf" cross-gcc-gensource 4.9
+cd cross-gcc-packages-amd64/cross-gcc-4.9-armhf
+apt-get install debhelper gcc-4.9-source libc6-dev:armhf linux-libc-dev:armhf libgcc1:armhf binutils-arm-linux-gnueabihf bison flex libtool gdb sharutils netbase libcloog-isl-dev libmpc-dev libmpfr-dev libgmp-dev systemtap-sdt-dev autogen expect chrpath zlib1g-dev zip
+dpkg-buildpackage
+
+
 if [ -e ${IDEB} ]; then
 	dpkg --install ${IDEB}/*.deb
 	[ $? -ne 0 ] && echo "dpkg error $?" exit 1
