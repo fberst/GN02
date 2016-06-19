@@ -35,7 +35,7 @@ export MNTROOT=${WORK}/mnt/root#             	#root mount point
 export MNTBOOT=${WORK}/mnt/boot#		#boot mount point
 
 #PATHS to FILS
-export IMG=${IMAGE}/gn01.img#
+export IMG=${IMAGE}/gn02.img#
 
 #default pardischen
 export BP=p1#   #boot pard
@@ -113,11 +113,13 @@ installUBootSD: umountall ${BOOT}/boot.cmd
 	dd if=${BOOT}/u-boot-sunxi-with-spl.bin of=${SD} bs=1024 seek=8 
 
 installKernel: mountall
-	#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
+	@#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
 	cp ${BOOT}/uImage ${MNTBOOT}/uImage
 	cp ${BOOT}/script.bin ${MNTBOOT}/
 	chown -R root:root ${MNTBOOT}/*
 	cp -r ${MODULES}/* ${MNTROOT}/
+	sync
+	${SC}/chroot.sh ${MNTROOT} "depmod -a 3.4.104-gd47d367-dirty "
 	sync
 
 mk_Uboot:
