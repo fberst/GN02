@@ -1,0 +1,38 @@
+kernel/drivers/gpio/gpio-sunxi.ko:
+kernel/drivers/video/sunxi/disp/disp_ump.ko: kernel/drivers/gpu/mali/ump/ump.ko
+kernel/drivers/gpu/drm/drm.ko:
+kernel/drivers/gpu/drm/mali/mali_drm.ko: kernel/drivers/gpu/drm/drm.ko
+kernel/drivers/gpu/mali/ump/ump.ko:
+kernel/drivers/gpu/mali/mali/mali.ko: kernel/drivers/gpu/mali/ump/ump.ko
+kernel/drivers/misc/sunxi-dbgreg.ko:
+kernel/drivers/scsi/scsi_wait_scan.ko:
+kernel/drivers/net/ethernet/ethoc.ko: kernel/drivers/net/phy/libphy.ko
+kernel/drivers/net/ethernet/allwinner/gmac/sunxi_gmac.ko: kernel/drivers/net/phy/libphy.ko
+kernel/drivers/net/phy/libphy.ko:
+kernel/drivers/usb/storage/usb-storage.ko:
+kernel/drivers/usb/storage/ums-alauda.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-cypress.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-datafab.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-eneub6250.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-freecom.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-isd200.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-jumpshot.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-karma.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-onetouch.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-realtek.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-sddr09.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-sddr55.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/storage/ums-usbat.ko: kernel/drivers/usb/storage/usb-storage.ko
+kernel/drivers/usb/gadget/g_file_storage.ko:
+kernel/drivers/input/keyboard/sun4i-keypad.ko:
+kernel/drivers/input/keyboard/sun4i-keyboard.ko:
+kernel/drivers/input/keyboard/sunxi-ir.ko:
+kernel/drivers/input/keyboard/hv2605.ko:
+kernel/drivers/i2c/algos/i2c-algo-bit.ko:
+kernel/drivers/media/video/sunxi/sunxi_cedar_mod.ko:
+kernel/drivers/cpufreq/cpufreq_stats.ko:
+kernel/drivers/hid/hid-logitech-dj.ko:
+kernel/drivers/w1/masters/w1-gpio.ko: kernel/drivers/w1/wire.ko
+kernel/drivers/w1/wire.ko:
+kernel/drivers/w1/w1_sunxi.ko:
+kernel/net/core/pktgen.ko:

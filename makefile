@@ -126,7 +126,7 @@ mk_Uboot:
 	${SC}/updateU-Boot.sh
 
 mk_Kernel:
-	${SC}/updateKernel.sh
+	${SC}/mk-kernel.sh
 help:
 	@echo "all functions listed hier are tested more ore less"
 	@echo "mk_rootfs		to create an root fs at ${ROOT}"

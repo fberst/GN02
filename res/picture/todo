@@ -1,0 +1,7 @@
+image.bmp -> bmptoppm -> ppm
+
+ppmquant 224 my_boot_logo.ppm > my_boot_logo_224.ppm
+
+nmnoraw my_boot_logo_224.ppm > my_boot_logo_ascii_224.ppm
+
+http://www.armadeus.org/wiki/index.php?title=Linux_Boot_Logo
