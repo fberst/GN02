@@ -7,8 +7,16 @@ fi
 cd ${SRCKERNEL}
 #git pull
 
-#to cp boot scren to kernel src
-#cp ${RES}/picture/gnboot.ppm ${SRCKERNEL}/drivers/video/logo/logo_linux_clut224.ppm
+
+[ -e ${PIC}/gn_boot.bmp ] && bmptoppm ${PIC}/gn_boot.bmp > ${PIC}/gn_boot.ppm
+if [ ! -e ${PIC}/gn_boot.ppm ]; then
+  echo "NO BOOT LOGO FOUND"
+  exit 1
+fi
+ppmquant 224 ${PIC}/gn_boot.ppm > ${PIC}/gn_boot_logo_224.ppm
+pnmnoraw ${PIC}/gn_boot_logo_224.ppm > ${PIC}/gn_boot_logo_ascii_224.ppm || exit 1
+
+cp ${PIC}/gn_boot_logo_ascii_224.ppm ${SRCKERNEL}/drivers/video/logo/logo_linux_clut224.ppm
 
 [[ ${CK} == "true" ]] && make clean
 
