@@ -53,11 +53,11 @@ SC=${SCRIPTS}
 mk_rootfs:
 	${SC}/mk-rootfs.sh
 
-mk_buildfs:
-	${SC}/mk-buildfs.sh
+#mk_buildfs:
+#	${SC}/mk-buildfs.sh
 
-mk_Buildfs-x86:
-	${SC}/mk-buildfs-x86.sh
+#mk_Buildfs-x86:
+#	${SC}/mk-buildfs-x86.sh
 
 chrootL:
 	${SC}/chroot.sh ${ROOT}
@@ -65,16 +65,16 @@ chrootL:
 chrootSD: mountall
 	${SC}/chroot.sh ${MNTROOT}
 
-chrootBuildfs:
-	${SC}/chroot.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
+#chrootBuildfs:
+#	${SC}/chroot.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
 
-chrootBuildfs-x86:
-	${SC}/chroot-x86.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
+#chrootBuildfs-x86:
+#	${SC}/chroot-x86.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
 
-mk_kernel_in_buildfs:
-	cp ${SC}/mk-kernel-in-buildfs.sh ${BUILDFS}/home/admin/mk-kernel-in-buildfs.sh
-	cp ${PIC}/gnBoot_logo_ascii_224.ppm ${BUILDFS}/home/admin/
-	${SC}/chroot.sh ${BUILDFS} "/home/admin/mk-kernel-in-buildfs.sh" admin:admin
+#mk_kernel_in_buildfs:
+#	cp ${SC}/mk-kernel-in-buildfs.sh ${BUILDFS}/home/admin/mk-kernel-in-buildfs.sh
+#	cp ${PIC}/gnBoot_logo_ascii_224.ppm ${BUILDFS}/home/admin/
+#	${SC}/chroot.sh ${BUILDFS} "/home/admin/mk-kernel-in-buildfs.sh" admin:admin
 
 clean:
 	rm -rf ./rootfs/*
@@ -122,11 +122,12 @@ installKernel: mountall
 	${SC}/chroot.sh ${MNTROOT} "depmod -a 3.4.104-gd47d367-dirty "
 	sync
 
-mk_Uboot:
+mk_uboot:
 	${SC}/updateU-Boot.sh
 
-mk_Kernel:
+mk_kernel:
 	${SC}/mk-kernel.sh
+
 help:
 	@echo "all functions listed hier are tested more ore less"
 	@echo "mk_rootfs		to create an root fs at ${ROOT}"
