@@ -32,6 +32,8 @@ for deb in $(ls -1 ${DEB}); do cp ${DEB}/${deb} ${ROOT}/${IDEB}; done
 
 #installing fils
 
+mkdir -p ${ROOT}"/home/rbe/"
+
 #installing sudoers file
 if [ -e ${FILES}"/sudoers" ]; then 
 	cp ${FILES}"/sudoers" ${ROOT}"/etc/sudoers"
@@ -39,10 +41,10 @@ if [ -e ${FILES}"/sudoers" ]; then
 fi
 
 #installintg udev rules
-if [ -e ${FILES}/*".rules" ]; then
+#if [ -e ${FILES}/*".rules" ]; then
 	cp ${FILES}/*".rules" ${ROOT}"/lib/udev/rules.d/"
 	chown -R root:root ${ROOT}"/lib/udev/rules.d"
-fi
+#fi
 
 #install /etc/network/interfaces
 if [ -e ${FILES}"/interfaces" ]; then 
@@ -65,7 +67,6 @@ fi
 
 #bashrc witch auto exec xcsore 
 if [ -e ${FILES}"/bashrc" ]; then
-  mkdir -p ${root}"/home/rbe"
 	cp ${FILES}"/bashrc" ${ROOT}"/home/rbe/bashrc"
 fi
 
@@ -82,14 +83,19 @@ if [ -e ${FILES}"/modules" ]; then
 	chown root:root ${ROOT}"/etc/modules"
 fi
 
+#install GN01-Update.sh
+if [ -e ${FILES}"/GN01-Update.sh" ]; then
+  cp ${FILES}"/GN01-Update.sh" ${ROOT}"/home/rbe/GN01-Update.sh"
+  chmod +x ${ROOT}"/home/rbe/GN01-Update.sh"
+fi
+
 #install fstab
 cat <<EOT > ${ROOT}/etc/fstab
-/dev/mmcblk0p2  /   ext3  defaults  0 1
+/dev/mmcblk0p2  /   ext4  defaults  0 1
 tmpfs /tmp  tmpfs defaults  0 0
 tmpfs /var/tmp  tmpfs defaults  0 0
-#none	/tmp	tmpfs	defaults,noatime,mode=1777 0 0
 # if you have a separate boot partition
-/dev/mmcblk0p1	/boot	vfat defaults 0 0 
+#/dev/mmcblk0p1	/boot	vfat defaults 0 0 
 EOT
 
 ./chroot.sh $ROOT "/root/init-rootfs.sh"  #ecec this script on newRoot

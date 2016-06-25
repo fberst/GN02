@@ -96,7 +96,7 @@ mk_SD: partSD cpRootfsToSD installUBootSD installKernel install_boot.xxx
 
 partSD: umountall
 	${SC}/part.sh ${SD}
-	mkfs.ext3 ${ROOTBD}
+	mkfs.ext4 -O has_journal,extent,huge_file,flex_bg,^metadata_csum,64bit,dir_nlink,extra_isize ${ROOTBD}
 	mkfs.vfat ${BOOTBD}
 
 cpRootfsToSD: mountall
