@@ -1,0 +1,36 @@
+From 412a0ee3d89ea804b426ca72f7f1e069e04104cd Mon Sep 17 00:00:00 2001
+From: flo <foo@@bar.com>
+Date: Sat, 25 Jun 2016 23:05:03 +0200
+Subject: [PATCH] gcc5
+
+---
+ arch/arm/include/asm/ftrace.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/include/asm/ftrace.h b/arch/arm/include/asm/ftrace.h
+index f89515a..75629e3 100644
+--- a/arch/arm/include/asm/ftrace.h
++++ b/arch/arm/include/asm/ftrace.h
+@@ -41,14 +41,14 @@ extern void ftrace_call_old(void);
+  * !CONFIG_ARM_UNWIND.
+  */
+ 
+-void *return_address(unsigned int);
++void *return_address(unsigned int level);
+ 
+ #else
+ 
+-extern inline void *return_address(unsigned int level)
+-{
+-	return NULL;
+-}
++extern void *return_address(unsigned int level);
++//{
++//	return NULL;
++//}
+ 
+ #endif
+ 
+-- 
+2.8.1
+
