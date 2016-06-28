@@ -1,10 +1,7 @@
 #ignore "rootfs"
 rootfs/
-
 buildfs/
-
 src/*
-
 mnt/
-
 boot/boot.scr
+res/XCSoarData/*
