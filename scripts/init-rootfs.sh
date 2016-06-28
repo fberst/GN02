@@ -94,6 +94,8 @@ echo "reconfigur locals? [y/n]"
 read rin
 [ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigure locales
 
+export LANG=en_US.UTF-8
+
 for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
 
 IDEB="/root/deb"
