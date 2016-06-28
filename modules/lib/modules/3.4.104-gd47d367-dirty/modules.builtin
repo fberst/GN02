@@ -1,7 +1,6 @@
 kernel/kernel/configs.ko
 kernel/fs/binfmt_misc.ko
 kernel/fs/mbcache.ko
-kernel/fs/autofs4/autofs4.ko
 kernel/fs/cachefiles/cachefiles.ko
 kernel/fs/configfs/configfs.ko
 kernel/fs/exportfs/exportfs.ko
@@ -10,16 +9,9 @@ kernel/fs/fat/fat.ko
 kernel/fs/fat/vfat.ko
 kernel/fs/fat/msdos.ko
 kernel/fs/fscache/fscache.ko
-kernel/fs/fuse/fuse.ko
-kernel/fs/fuse/cuse.ko
 kernel/fs/jbd2/jbd2.ko
 kernel/fs/nls/nls_base.ko
 kernel/fs/nls/nls_cp437.ko
-kernel/fs/nls/nls_cp932.ko
-kernel/fs/nls/nls_euc-jp.ko
-kernel/fs/nls/nls_cp936.ko
-kernel/fs/nls/nls_cp949.ko
-kernel/fs/nls/nls_cp950.ko
 kernel/fs/nls/nls_ascii.ko
 kernel/fs/nls/nls_iso8859-1.ko
 kernel/fs/nls/nls_utf8.ko
@@ -60,9 +52,6 @@ kernel/block/deadline-iosched.ko
 kernel/block/cfq-iosched.ko
 kernel/drivers/base/firmware_class.ko
 kernel/drivers/block/brd.ko
-kernel/drivers/block/loop.ko
-kernel/drivers/block/cryptoloop.ko
-kernel/drivers/cdrom/cdrom.ko
 kernel/drivers/char/sunxi_g2d/g2d_23.ko
 kernel/drivers/connector/cn.ko
 kernel/drivers/cpufreq/cpufreq_performance.ko
@@ -114,7 +103,6 @@ kernel/drivers/power/power_supply.ko
 kernel/drivers/rtc/rtc-sun4i.ko
 kernel/drivers/scsi/scsi_mod.ko
 kernel/drivers/scsi/sd_mod.ko
-kernel/drivers/scsi/sr_mod.ko
 kernel/drivers/tty/serial/serial_core.ko
 kernel/drivers/tty/serial/8250/8250.ko
 kernel/drivers/tty/serial/8250/8250_sunxi.ko
@@ -164,9 +152,7 @@ kernel/net/xfrm/xfrm_ipcomp.ko
 kernel/lib/bitrev.ko
 kernel/lib/crc16.ko
 kernel/lib/crc-t10dif.ko
-kernel/lib/crc-itu-t.ko
 kernel/lib/crc32.ko
-kernel/lib/libcrc32c.ko
 kernel/lib/lzo/lzo_compress.ko
 kernel/lib/lzo/lzo_decompress.ko
 kernel/lib/xz/xz_dec.ko

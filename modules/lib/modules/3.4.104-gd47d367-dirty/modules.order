@@ -36,3 +36,5 @@ kernel/drivers/w1/masters/w1-gpio.ko
 kernel/drivers/w1/wire.ko
 kernel/drivers/w1/w1_sunxi.ko
 kernel/net/core/pktgen.ko
+kernel/lib/crc-itu-t.ko
+kernel/lib/libcrc32c.ko

@@ -58,6 +58,7 @@ alias symbol:drm_property_create_enum drm
 alias symbol:genphy_resume libphy
 alias symbol:drm_mode_validate_size drm
 alias symbol:get_phy_device libphy
+alias symbol:crc_itu_t_table crc_itu_t
 alias symbol:phy_attach libphy
 alias symbol:drm_gem_object_lookup drm
 alias symbol:drm_mode_connector_attach_encoder drm
@@ -86,6 +87,7 @@ alias symbol:drm_mode_sort drm
 alias symbol:drm_mm_insert_node_in_range drm
 alias symbol:drm_connector_property_get_value drm
 alias symbol:drm_ht_insert_item drm
+alias symbol:crc32c libcrc32c
 alias symbol:drm_class_device_register drm
 alias symbol:drm_mode_connector_detach_encoder drm
 alias symbol:usb_stor_probe2 usb_storage
@@ -179,6 +181,7 @@ alias symbol:drm_poll drm
 alias symbol:mdiobus_unregister libphy
 alias symbol:phy_device_register libphy
 alias symbol:drm_put_dev drm
+alias symbol:crc_itu_t crc_itu_t
 alias symbol:drm_ht_find_item drm
 alias symbol:w1_write_8 wire
 alias symbol:ump_dd_phys_block_count_get ump
