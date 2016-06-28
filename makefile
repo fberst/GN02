@@ -105,8 +105,8 @@ install_rootfs: mountall
 	sync
 
 install_xcs_data: mountall
-  mkdir -p ${MNTROOT}/home/rbe/XCSoarData
-  cp -r ${XCSoarData} ${MNTROOT}/home/rbe/XCSoarData
+	mkdir -p ${MNTROOT}/home/rbe/XCSoarData
+	cp -r ${XCSoarData} ${MNTROOT}/home/rbe/XCSoarData
 
 install_boot.xxx: mountall
 	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.scr
