@@ -17,21 +17,22 @@ export CLEARROOT=false#  #clear root when making new $root " -mr "
 export WORK=/home/florian/GN02#         #work dir
 export IMAGE=${WORK}/image#            	#image dir
 export BOOT=${WORK}/boot#               #boot data z.b. uImage ..
-export ROOT=${WORK}/rootfs#    		#local root dir
-export BUILDFS=${WORK}/buildfs#		#build fs
+export ROOT=${WORK}/rootfs#    					#local root dir
+export BUILDFS=${WORK}/buildfs#					#build fs
 export SCRIPTS=${WORK}/scripts#         #bscript's to creat image
 export SCRIPTBIN=${SCRIPTS}/scriptBin#  #bin2fex && fex2bin
 export SRC=${WORK}/src#                 #sorcecode
-export SRCKERNEL=${SRC}/linux-sunxi# 	#kernel src #TODO
-export SRCUBOOT=${SRC}/u-boot#   	#uBoot src #TODO
+export SRCKERNEL=${SRC}/linux-sunxi# 		#kernel src 
+export SRCUBOOT=${SRC}/u-boot#   				#uBoot src 
 export RES=${WORK}/res#                 #resorces
 export DEB=${RES}/deb#                  #.deb for auto install 
 export FILES=${RES}/files#              #fils to install z.b. sudoers
 export LIB=${RES}/lib#                  #mali .so fils z.b. Mali.so, libEGL.so
-export PIC=${RES}/picture#		#pictures
+export PIC=${RES}/picture#							#pictures
+export XCSoarData=${RES}/XCSoarData#					#xcsor data
 export MODULES=${WORK}/modules
 
-export MNTROOT=${WORK}/mnt/root#             	#root mount point
+export MNTROOT=${WORK}/mnt/root#   	#root mount point
 export MNTBOOT=${WORK}/mnt/boot#		#boot mount point
 
 #PATHS to FILS
@@ -65,20 +66,20 @@ chrootL:
 chrootSD: mountall
 	${SC}/chroot.sh ${MNTROOT}
 
+download_xcs_data:
+	rm -rf ${XCSoarData}/*
+	${SC}/download_xcs-data.sh
+
 #chrootBuildfs:
 #	${SC}/chroot.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
 
 #chrootBuildfs-x86:
 #	${SC}/chroot-x86.sh ${BUILDFS} "/bin/bash --rcfile /home/admin/.bashrc " admin:admin
 
-#mk_kernel_in_buildfs:
-#	cp ${SC}/mk-kernel-in-buildfs.sh ${BUILDFS}/home/admin/mk-kernel-in-buildfs.sh
-#	cp ${PIC}/gnBoot_logo_ascii_224.ppm ${BUILDFS}/home/admin/
-#	${SC}/chroot.sh ${BUILDFS} "/home/admin/mk-kernel-in-buildfs.sh" admin:admin
-
 clean:
 	rm -rf ./rootfs/*
-	rm -rf ./buildfs/
+	rm -rf ./buildfs/*
+	rm -rf ${XCSoarData}/*
 	
 mk_img:
 	@echo "TODO"
@@ -92,27 +93,31 @@ mount_all_old_system: umountall
 umountall:
 	${SC}/umount.sh
 
-mk_SD: partSD cpRootfsToSD installUBootSD installKernel install_boot.xxx 
+mk_SD: partSD install_rootfs install_xcs_data install_UBootSD install_Kernel install_boot.xxx 
 
 partSD: umountall
 	${SC}/part.sh ${SD}
 	mkfs.ext4 -O has_journal,extent,huge_file,flex_bg,^metadata_csum,64bit,dir_nlink,extra_isize ${ROOTBD}
 	mkfs.vfat ${BOOTBD}
 
-cpRootfsToSD: mountall
+install_rootfs: mountall
 	rsync -avx --delete ${ROOT}/ ${MNTROOT}
 	sync
 
-install_boot.xxx:
+install_xcs_data: mountall
+  mkdir -p ${MNTROOT}/home/rbe/XCSoarData
+  cp -r ${XCSoarData} ${MNTROOT}/home/rbe/XCSoarData
+
+install_boot.xxx: mountall
 	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.scr
 	cp ${BOOT}/boot.cmd ${MNTBOOT}/
 	cp ${BOOT}/boot.scr ${MNTBOOT}/
 
-installUBootSD: umountall ${BOOT}/boot.cmd
+install_UBootSD: umountall ${BOOT}/boot.cmd
 	[ -b ${SD} ] || exit 1
 	dd if=${BOOT}/u-boot-sunxi-with-spl.bin of=${SD} bs=1024 seek=8 
 
-installKernel: mountall
+install_kernel: mountall
 	@#mv ${MNTBOOT}"/uImage" ${MNTBOOT}"/uImage.bak" #backup old kernel
 	cp ${BOOT}/uImage ${MNTBOOT}/uImage
 	cp ${BOOT}/script.bin ${MNTBOOT}/
