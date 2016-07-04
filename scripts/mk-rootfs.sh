@@ -26,7 +26,9 @@ cp ${SCRIPTS}"/init-rootfs.sh" ${ROOT}"/root/init-rootfs.sh"	#cp this script to 
 IDEB=root/deb/
 #cp .deb to rootfs
 mkdir -p ${ROOT}/${IDEB}
-for deb in $(ls -1 ${DEB}); do cp ${DEB}/${deb} ${ROOT}/${IDEB}; done
+if [ -d ${IDEB} ]; then
+  for deb in $(ls -1 ${DEB}); do cp ${DEB}/${deb} ${ROOT}/${IDEB}; done
+fi
 
 #[ -e ${DEB}/* ] && cp -Rv ${DEB}/* ${ROOT}/$IDEB #cp .deb to root dir
 
