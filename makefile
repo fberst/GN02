@@ -93,7 +93,7 @@ mount_all_old_system: umountall
 umountall:
 	${SC}/umount.sh
 
-mk_SD: partSD install_rootfs install_xcs_data install_UBootSD install_Kernel install_boot.xxx 
+mk_SD: partSD install_rootfs install_xcs_data install_UBootSD install_kernel install_boot.xxx 
 
 partSD: umountall
 	${SC}/part.sh ${SD}
