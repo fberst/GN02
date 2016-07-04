@@ -62,6 +62,7 @@ PLIST=(
 #"sunxi-tools"
 "tar"
 "gzip"
+"wget"
 #"u-boot-tools"
 "make"
 #"g++"
@@ -74,6 +75,11 @@ PLIST=(
 "libjpeg62-turbo"
 "libpng12-0"
 "ttf-dejavu"
+"libtiff5"
+"libgeotiff2"
+"libinput5"
+"lua5.2"
+"liblua5.2"
 )
 
 CLEANUP="false" #clean up image
