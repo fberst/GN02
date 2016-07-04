@@ -93,7 +93,7 @@ mount_all_old_system: umountall
 umountall:
 	${SC}/umount.sh
 
-mk_SD: partSD install_rootfs install_xcs_data install_UBootSD install_Kernel install_boot.xxx 
+mk_SD: partSD install_rootfs install_xcs_data install_UBootSD install_kernel install_boot.xxx 
 
 partSD: umountall
 	${SC}/part.sh ${SD}
@@ -106,7 +106,7 @@ install_rootfs: mountall
 
 install_xcs_data: mountall
 	mkdir -p ${MNTROOT}/home/rbe/XCSoarData
-	cp -r ${XCSoarData} ${MNTROOT}/home/rbe/XCSoarData
+	cp -r ${XCSoarData} ${MNTROOT}/home/rbe/
 
 install_boot.xxx: mountall
 	mkimage -C none -A arm -T script -d ${BOOT}/boot.cmd ${BOOT}/boot.scr
