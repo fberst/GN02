@@ -90,25 +90,28 @@ echo "initBaseSystem"
 #initBaseSystem
 [ -x "/debootstrap/debootstrap" ] && /debootstrap/debootstrap --second-stage
 
-##system einrichten und so 	
+##update 	
 apt-get update
 apt-get upgrade -y
-apt-get dist-upgrade -y					#update all
+apt-get dist-upgrade -y	
 
+#update and istall locales
 apt-get install -y dialog locales 
 echo "reconfigur locals? [y/n]"
 read rin
 [ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigure locales
 
 export LANG=en_US.UTF-8
-
+#install all package
 for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
 
+#install all .deb
 IDEB="/root/deb"
-
 if [ -e ${IDEB} ]; then
-	dpkg --install ${IDEB}/*.deb
-	[ $? -ne 0 ] && echo "dpkg error $?" exit 1
+  for i in $(ls -1 ${IDEB}/); do
+    dpkg --install ${IDEB}/*.deb
+    [ $? -ne 0 ] && echo "dpkg error $?" exit 1
+  done
 fi
 #seting pw for root
 usermod -p $(openssl passwd ${passRoot}) root
@@ -127,9 +130,12 @@ for group in ${groupsRbe[@]}; do groupadd -f $group; done
 for group in ${groupsAdmin[@]}; do usermod -aG ${group} ${userAdmin}; done
 for group in ${groupsRbe[@]}; do usermod -aG ${group} ${userRbe}; done
 
+#finaly install bashrc with auto start xcsore 
 [ -f "/home/rbe/bashrc" ] && mv "/home/rbe/bashrc" "/home/rbe/.bashrc"
 [ $? -eq 1 ] && echo "can't install .bashrc"
-[ -f "/home/rbe/.bashrc" ] && chown rbe:rbe "/home/rbe/.bashrc"
+[ -f "/home/rbe/.bashrc" ] && chown ${userRbe}:${userRbe} "/home/rbe/.bashrc"
+
+chown -R ${userRbe}:${userRbe} /home/${userRbe}
 
 #sherd lib setup #TODO
 ldconfig		
