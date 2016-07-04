@@ -16,8 +16,6 @@ kernel/fs/nls/nls_ascii.ko
 kernel/fs/nls/nls_iso8859-1.ko
 kernel/fs/nls/nls_utf8.ko
 kernel/fs/ntfs/ntfs.ko
-kernel/fs/quota/quota_v2.ko
-kernel/fs/quota/quota_tree.ko
 kernel/crypto/crypto.ko
 kernel/crypto/crypto_wq.ko
 kernel/crypto/crypto_algapi.ko
@@ -122,13 +120,6 @@ kernel/drivers/video/console/softcursor.ko
 kernel/drivers/video/sunxi/disp/disp.ko
 kernel/drivers/video/sunxi/hdmi/hdmi.ko
 kernel/drivers/video/sunxi/lcd/lcd.ko
-kernel/net/802/p8022.ko
-kernel/net/802/psnap.ko
-kernel/net/802/stp.ko
-kernel/net/802/garp.ko
-kernel/net/8021q/vlan_core.ko
-kernel/net/8021q/8021q.ko
-kernel/net/bridge/bridge.ko
 kernel/net/dns_resolver/dns_resolver.ko
 kernel/net/ipv4/ipip.ko
 kernel/net/ipv4/ah4.ko
@@ -142,11 +133,8 @@ kernel/net/ipv4/xfrm4_mode_transport.ko
 kernel/net/ipv4/xfrm4_mode_tunnel.ko
 kernel/net/ipv4/tcp_cubic.ko
 kernel/net/key/af_key.ko
-kernel/net/llc/llc.ko
 kernel/net/packet/af_packet.ko
-kernel/net/rfkill/rfkill.ko
 kernel/net/unix/unix.ko
-kernel/net/wireless/cfg80211.ko
 kernel/net/xfrm/xfrm_user.ko
 kernel/net/xfrm/xfrm_ipcomp.ko
 kernel/lib/bitrev.ko
