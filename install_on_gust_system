@@ -1,5 +1,15 @@
+#to create the rootfs
 debootstrap
+
+#arm vm
+qemu-user-static
+qemu
+qemu-system-arm
 
 netpbm
 
+#kernel menuconfig
+libncurses5-dev
 
+#u-boot
+u-boot-tools
