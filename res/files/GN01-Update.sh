@@ -51,6 +51,13 @@ if [ -f "$BackupPath/xcsoar_gn01" ]; then
   chown rbe $XCSoarBin/xcsoar_backup
 fi
 
+if [ -f "$BackupPath/GN01-rootfs.tgz" ]; then
+  tar -xzf $BackupPath/GN01-rootfs.tgz -C /
+  /bin/sync
+  rm $BackupPath/GN01-rootfs.tgz
+  sudo reboot 
+fi
+
 # force sync of files to disk before unmounting
 /bin/sync
 
