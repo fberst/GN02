@@ -31,6 +31,13 @@ fi
 /usr/bin/logger copying flight logs
 /usr/bin/rsync -rtv $XCSoarData/logs/ $BackupPath/logs
 
+# Check if backup-directory for profiles exists, if not then create it
+if [ ! -d "$BackupPath/profiles" ]; then
+  mkdir $BackupPath/profiles
+fi
+/usr/bin/logger copying profile files
+/usr/bin/rsync -rtv $XCSoarData/*.prf $BackupPath/profiles
+
 /usr/bin/logger copying data files to GN-01
 /usr/bin/rsync -rtv $BackupPath/To-GN01/ $XCSoarData
 chown -fR rbe $XCSoarData
