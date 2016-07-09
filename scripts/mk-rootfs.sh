@@ -91,6 +91,12 @@ if [ -e ${FILES}"/GN01-Update.sh" ]; then
   chmod +x ${ROOT}"/home/rbe/GN01-Update.sh"
 fi
 
+#install xcsoar bin
+if [ -e ${BIN}"xcsoar_gn01" ]; then
+  cp ${BIN}"xcsoar_gn01" ${ROOT}"/home/rbe/xcsoar_gn01"
+	chmod +x ${ROOT}"/home/rbe/xcsoar_gn01"
+fi
+
 #install fstab
 cat <<EOT > ${ROOT}/etc/fstab
 /dev/mmcblk0p2  /   ext4  defaults  0 1
