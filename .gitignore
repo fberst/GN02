@@ -5,3 +5,4 @@ src/*
 mnt/
 boot/boot.scr
 res/XCSoarData/*
+res/img/*
