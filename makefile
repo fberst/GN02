@@ -28,6 +28,7 @@ export DEB=${RES}/deb#                  #.deb for auto install
 export FILES=${RES}/files#              #fils to install z.b. sudoers
 export LIB=${RES}/lib#                  #mali .so fils z.b. Mali.so, libEGL.so
 export PIC=${RES}/picture#              #pictures
+export BIN=${RES}/bin#                  #bin's
 export XCSoarData=${RES}/XCSoarData#    #xcsor data
 export IMGDIR=${RES}/img#            	#image dir
 export MODULES=${WORK}/modules
