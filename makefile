@@ -15,28 +15,28 @@ export CLEARROOT=false#  #clear root when making new $root " -mr "
 
 
 export WORK=/home/florian/GN02#         #work dir
-export IMAGE=${WORK}/image#            	#image dir
 export BOOT=${WORK}/boot#               #boot data z.b. uImage ..
-export ROOT=${WORK}/rootfs#    					#local root dir
-export BUILDFS=${WORK}/buildfs#					#build fs
+export ROOT=${WORK}/rootfs#             #local root dir
+export BUILDFS=${WORK}/buildfs#	        #build fs
 export SCRIPTS=${WORK}/scripts#         #bscript's to creat image
 export SCRIPTBIN=${SCRIPTS}/scriptBin#  #bin2fex && fex2bin
 export SRC=${WORK}/src#                 #sorcecode
-export SRCKERNEL=${SRC}/linux-sunxi# 		#kernel src 
-export SRCUBOOT=${SRC}/u-boot#   				#uBoot src 
+export SRCKERNEL=${SRC}/linux-sunxi#    #kernel src 
+export SRCUBOOT=${SRC}/u-boot#          #uBoot src 
 export RES=${WORK}/res#                 #resorces
 export DEB=${RES}/deb#                  #.deb for auto install 
 export FILES=${RES}/files#              #fils to install z.b. sudoers
 export LIB=${RES}/lib#                  #mali .so fils z.b. Mali.so, libEGL.so
-export PIC=${RES}/picture#							#pictures
-export XCSoarData=${RES}/XCSoarData#					#xcsor data
+export PIC=${RES}/picture#              #pictures
+export XCSoarData=${RES}/XCSoarData#    #xcsor data
+export IMGDIR=${RES}/img#            	#image dir
 export MODULES=${WORK}/modules
 
-export MNTROOT=${WORK}/mnt/root#   	#root mount point
-export MNTBOOT=${WORK}/mnt/boot#		#boot mount point
+export MNTROOT=${WORK}/mnt/root#        #root mount point
+export MNTBOOT=${WORK}/mnt/boot#        #boot mount point
 
 #PATHS to FILS
-export IMG=${IMAGE}/gn02.img#
+export IMG=${IMGDIR}/GN02.img#
 
 #default pardischen
 export BP=p1#   #boot pard
@@ -48,6 +48,7 @@ export CK=false#	clean kernel src
 export CU=false#	clean u-boot
 export UPU=false#	update-u-boot
 
+export IMGBOOTSIZE=100000#	boot part size in kb for .img
 
 SC=${SCRIPTS}
 
@@ -80,9 +81,15 @@ clean:
 	rm -rf ./rootfs/*
 	rm -rf ./buildfs/*
 	rm -rf ${XCSoarData}/*
+
+.mk_img_file:
+	${SC}/mk-img-file.sh
 	
-mk_img:
-	@echo "TODO"
+mk_img: export SD = /dev/loop0
+mk_img: .mk_img_file mk_SD umountall
+	sync
+	losetup -d ${SD}
+	tar -c --xz $(IMG) -f $(IMG).tar.xz
 
 mountall: umountall
 	${SC}/mount.sh
@@ -134,14 +141,11 @@ mk_kernel:
 	${SC}/mk-kernel.sh
 
 help:
-	@echo "all functions listed hier are tested more ore less"
 	@echo "mk_rootfs		to create an root fs at ${ROOT}"
-	@echo "mk_buildfs		to create an build fs " 
 	@echo "mountall			mounts boot and root part. to mnt{boot:root}"
 	@echo "umountrall		umounts all part. on SD" 
 	@echo "chrootL			chroot to local rootfs"
 	@echo "chrootSD			chroot to ${SD}p2"
-	@echo "chrootBuildfs	chroot to buildfs"
 	@echo "cpRootfsToSD		self expaining"
 	@echo "partSD			parts sdcart"
 	@echo ""
