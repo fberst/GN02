@@ -135,11 +135,11 @@ for group in ${groupsRbe[@]}; do usermod -aG ${group} ${userRbe}; done
 [ $? -eq 1 ] && echo "can't install .bashrc"
 [ -f "/home/rbe/.bashrc" ] && chown ${userRbe}:${userRbe} "/home/rbe/.bashrc"
 
+#This is my homedir. There are many like it, but this one is mine. My homedir is my best friend. It is my life. I must master it as I master my life. My homedir, without me, is useless. Without my homedir, I am useless.
 chown -R ${userRbe}:${userRbe} /home/${userRbe}
 
-#sherd lib setup #TODO
+#configure dynamic linker run-time bindings
 ldconfig		
-#xcsore staf	#TODO
 
 #set hostname
 echo ${HOSTNAME} > "/etc/hostname"
