@@ -38,12 +38,6 @@ PLIST=(
 "apt-utils"
 "rsync"
 "firmware-linux-nonfree"
-#"libcurl3"              #xcsore-dep
-#"libjpeg8"              #...
-#"libpng12-0"            #...
-#"ttf-dejavu"            #...
-#"stow"                   #...
-#"ssh"
 "htop"
 "kbd"
 "console-common"
@@ -90,6 +84,7 @@ echo "initBaseSystem"
 #initBaseSystem
 [ -x "/debootstrap/debootstrap" ] && /debootstrap/debootstrap --second-stage
 
+export LANG=en_US.UTF-8
 ##update 	
 apt-get update
 apt-get upgrade -y
@@ -101,7 +96,6 @@ echo "reconfigur locals? [y/n]"
 read rin
 [ ${rin} == "y" -o ${rin} == "Y" ] && dpkg-reconfigure locales
 
-export LANG=en_US.UTF-8
 #install all package
 for i in ${PLIST[@]}; do echo "INSTALL: $i"; apt-get install -y $i; done
 
@@ -113,6 +107,7 @@ if [ -e ${IDEB} ]; then
     [ $? -ne 0 ] && echo "dpkg error $?" exit 1
   done
 fi
+
 #seting pw for root
 usermod -p $(openssl passwd ${passRoot}) root
 
@@ -143,7 +138,6 @@ ldconfig
 
 #set hostname
 echo ${HOSTNAME} > "/etc/hostname"
-
 
 if [ ${CLEANUP} == "true" ]; then
 	rm -rf ${IDEB} #rm deb dir
