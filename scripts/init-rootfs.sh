@@ -74,6 +74,7 @@ PLIST=(
 "libinput5"
 "lua5.2"
 "liblua5.2"
+"libasound2"
 )
 
 CLEANUP="false" #clean up image
