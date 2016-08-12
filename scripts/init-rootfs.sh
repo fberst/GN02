@@ -76,6 +76,7 @@ PLIST=(
 "liblua5.2"
 "libasound2"
 "usbutils"
+"alsa-utils"
 )
 
 CLEANUP="false" #clean up image
