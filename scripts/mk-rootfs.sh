@@ -97,6 +97,18 @@ if [ -e ${BIN}"xcsoar_gn01" ]; then
 	chmod +x ${ROOT}"/home/rbe/xcsoar_gn01"
 fi
 
+#install xcsoar_backup bin
+if [ -e ${BIN}"xcsoar_gn01" ]; then
+  cp ${BIN}"xcsoar_gn01" ${ROOT}"/home/rbe/xcsoar_backup"
+        chmod +x ${ROOT}"/home/rbe/xcsoar_backup"
+fi
+
+#install .xcsoar_backup bin
+if [ -e ${BIN}"xcsoar_gn01" ]; then
+  cp ${BIN}"xcsoar_gn01" ${ROOT}"/home/rbe/.xcsoar_backup"
+        chmod +x ${ROOT}"/home/rbe/.xcsoar_backup"
+fi
+
 #install fstab
 cat <<EOT > ${ROOT}/etc/fstab
 /dev/mmcblk0p2  /   ext4  defaults  0 1

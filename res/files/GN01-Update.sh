@@ -31,7 +31,7 @@ fi
 /usr/bin/logger copying flight logs
 /usr/bin/rsync -rtv $XCSoarData/logs/ $BackupPath/logs
 
-# Check if backup-directory for profiles exists, if not then create it
+# Check if directory for profiles exists, if not then create it
 if [ ! -d "$BackupPath/profiles" ]; then
   mkdir $BackupPath/profiles
 fi
@@ -44,17 +44,27 @@ chown -fR rbe $XCSoarData
 
 if [ -f "$BackupPath/xcsoar_gn01" ]; then
   cp $BackupPath/xcsoar_gn01 $XCSoarBin/xcsoar_new
-  cp $XCSoarBin/xcsoar_gn01 $XCSoarBin/xcsoar_backup
+  sudo rm $BackupPath/xcsoar_gn01
+  /bin/sync
+  sudo rm $XCSoarBin/xcsoar_backup
+  mv $XCSoarBin/xcsoar_gn01 $XCSoarBin/xcsoar_backup
+  chmod +x $XCSoarBin/xcsoar_backup
+  chown rbe $XCSoarBin/xcsoar_backup
+  /bin/sync
   mv $XCSoarBin/xcsoar_new $XCSoarBin/xcsoar_gn01
   chmod +x $XCSoarBin/xcsoar_gn01
   chown rbe $XCSoarBin/xcsoar_gn01
-  chown rbe $XCSoarBin/xcsoar_backup
+  /bin/sync
+  /bin/umount $BackupPath
+  sudo reboot
 fi
 
 if [ -f "$BackupPath/GN01-rootfs.tgz" ]; then
   tar -xzf $BackupPath/GN01-rootfs.tgz -C /
   /bin/sync
   rm $BackupPath/GN01-rootfs.tgz
+  /bin/sync
+  /bin/umount $BackupPath
   sudo reboot 
 fi
 
