@@ -21,6 +21,8 @@ pnmnoraw ${PIC}/gn_boot_logo_224.ppm > ${PIC}/gn_boot_logo_ascii_224.ppm || exit
 
 cp ${PIC}/gn_boot_logo_ascii_224.ppm ${SRCKERNEL}/drivers/video/logo/logo_linux_clut224.ppm
 
+[ ! -e ${SRCKERNEL}/.config ] && cp ${BOOT}/config_current ${SRCKERNEL}/.config
+
 [[ ${CK} == "true" ]] && make clean
 
 [ -f ${SRCKERNEL}/.config ] || make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- sun7i_defconfig
