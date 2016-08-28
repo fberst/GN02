@@ -5,7 +5,7 @@ if [ ! -d ${SRCKERNEL}/.git ]; then
   git clone -b sunxi-3.4 --depth 1 https://github.com/linux-sunxi/linux-sunxi.git || exit 1
   cd ${SRCKERNEL}
   cp ${RES}/compiler-gcc5.h ${SRCKERNEL}/include/linux/
-  cp ${RES}/compiler-ggc6.h ${SRCKERNEL}/include/linux/
+  cp ${RES}/compiler-gcc6.h ${SRCKERNEL}/include/linux/
   patch -p1 < ${RES}/0001-gcc5.patch
 fi
 
