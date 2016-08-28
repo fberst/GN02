@@ -32,7 +32,7 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=output modules
 cd ${WORK}
 
 cp ${SRCKERNEL}/arch/arm/boot/uImage ${BOOT}/
-cp ${SRCKERNEL}/.config ${BOOT}/config_curent
+cp ${SRCKERNEL}/.config ${BOOT}/config_current
 cp -r ${SRCKERNEL}/output/* modules/
 #arch/arm/boot/uImage		#kernel
 #output/lib/modules/3.4.XXX/	#moduls 
