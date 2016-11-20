@@ -5,7 +5,7 @@ SHELL := /bin/bash
 #
 ######################################
 ##DEFAULTS
-export SD=/dev/mmcblk2# #default sdcard
+export SD=/dev/mmcblk0# #default sdcard
 export BOOTBD=${SD}p1#  #default boot block dev
 export ROOTBD=${SD}p2#  #default root block dev
 
@@ -50,6 +50,8 @@ export CU=false#	clean u-boot
 export UPU=false#	update-u-boot
 
 export IMGBOOTSIZE=100000#	boot part size in kb for .img
+
+export DISPLAY_ZOLL=5#  #display size 0=default
 
 SC=${SCRIPTS}
 

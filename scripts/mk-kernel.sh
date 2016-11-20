@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 if [ ! -d ${SRCKERNEL}/.git ]; then
   cd ${SRC}
   git clone -b sunxi-3.4 --depth 1 https://github.com/linux-sunxi/linux-sunxi.git || exit 1
@@ -11,7 +12,12 @@ fi
 
 cd ${SRCKERNEL}
 
-[ -e ${PIC}/gn_boot.bmp ] && bmptoppm ${PIC}/gn_boot.bmp > ${PIC}/gn_boot.ppm
+if [[ ${DISPLAY_ZOLL} == 5 ]]; then
+  [ -e ${PIC}/gn_boot_5zoll.bmp ] && bmptoppm ${PIC}/gn_boot_5zoll.bmp > ${PIC}/gn_boot.ppm 
+else
+  [ -e ${PIC}/gn_boot.bmp ] && bmptoppm ${PIC}/gn_boot.bmp > ${PIC}/gn_boot.ppm
+fi
+
 if [ ! -e ${PIC}/gn_boot.ppm ]; then
   echo "NO BOOT LOGO FOUND"
   exit 1
@@ -33,9 +39,14 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=output modules
 
 cd ${WORK}
 
-cp ${SRCKERNEL}/arch/arm/boot/uImage ${BOOT}/
+if [[ ${DISPLAY_ZOLL} == 5 ]]; then
+  cp ${SRCKERNEL}/arch/arm/boot/uImage ${BOOT}/uImage_5zoll
+else
+  cp ${SRCKERNEL}/arch/arm/boot/uImage ${BOOT}/5zoll_uImage
+fi
 cp ${SRCKERNEL}/.config ${BOOT}/config_current
 cp -r ${SRCKERNEL}/output/* modules/
+
 #arch/arm/boot/uImage		#kernel
 #output/lib/modules/3.4.XXX/	#moduls 
 

@@ -51,12 +51,14 @@ alias symbol:drm_order drm
 alias symbol:snd_add_device_sysfs_file snd
 alias symbol:snd_card_proc_new snd
 alias symbol:drm_ati_pcigart_cleanup drm
+alias symbol:usb_serial_suspend usbserial
 alias symbol:snd_ctl_boolean_stereo_info snd
 alias symbol:w1_next_pullup wire
 alias symbol:drm_mode_parse_command_line_for_connector drm
 alias symbol:phy_mii_ioctl libphy
 alias symbol:snd_card_free snd
 alias symbol:snd_rawmidi_info_select snd_rawmidi
+alias symbol:usb_serial_generic_submit_read_urbs usbserial
 alias symbol:drm_mode_width drm
 alias symbol:drm_mm_pre_get drm
 alias symbol:drm_gem_handle_delete drm
@@ -97,6 +99,7 @@ alias symbol:snd_pcm_lib_preallocate_pages snd_pcm
 alias symbol:snd_pcm_hw_rule_noresample snd_pcm
 alias symbol:bt_debugfs bluetooth
 alias symbol:drm_platform_init drm
+alias symbol:usb_serial_port_softint usbserial
 alias symbol:bt_accept_unlink bluetooth
 alias symbol:drm_mode_config_init drm
 alias symbol:snd_ctl_remove snd
@@ -109,6 +112,7 @@ alias symbol:bt_sock_recvmsg bluetooth
 alias symbol:phy_attach libphy
 alias symbol:drm_gem_object_lookup drm
 alias symbol:drm_mode_connector_attach_encoder drm
+alias symbol:usb_serial_resume usbserial
 alias symbol:drm_idlelock_release drm
 alias symbol:snd_timer_stop snd_timer
 alias symbol:mdiobus_free libphy
@@ -127,7 +131,9 @@ alias symbol:bt_sock_reclassify_lock bluetooth
 alias symbol:hci_connect bluetooth
 alias symbol:drm_mm_scan_remove_block drm
 alias symbol:snd_card_unref snd
+alias symbol:usb_serial_generic_write usbserial
 alias symbol:ump_dd_phys_blocks_get ump
+alias symbol:usb_serial_generic_process_read_urb usbserial
 alias symbol:drm_mode_prune_invalid drm
 alias symbol:snd_timer_resolution snd_timer
 alias symbol:ump_dd_size_get ump
@@ -143,6 +149,7 @@ alias symbol:hci_le_start_enc bluetooth
 alias symbol:snd_rawmidi_transmit_peek snd_rawmidi
 alias symbol:snd_dma_free_pages snd_page_alloc
 alias symbol:drm_platform_exit drm
+alias symbol:usb_serial_generic_read_bulk_callback usbserial
 alias symbol:usb_stor_bulk_transfer_buf usb_storage
 alias symbol:drm_edid_is_valid drm
 alias symbol:drm_prime_lookup_imported_buf_handle drm
@@ -155,9 +162,11 @@ alias symbol:snd_timer_interrupt snd_timer
 alias symbol:bt_sock_link bluetooth
 alias symbol:drm_connector_property_get_value drm
 alias symbol:drm_ht_insert_item drm
+alias symbol:usb_serial_generic_resume usbserial
 alias symbol:drm_class_device_register drm
 alias symbol:snd_ctl_register_ioctl snd
 alias symbol:snd_ctl_rename_id snd
+alias symbol:usb_serial_generic_unthrottle usbserial
 alias symbol:drm_mode_connector_detach_encoder drm
 alias symbol:usb_stor_probe2 usb_storage
 alias symbol:drm_handle_vblank drm
@@ -177,6 +186,7 @@ alias symbol:usb_stor_access_xfer_buf usb_storage
 alias symbol:mali_set_user_setting mali
 alias symbol:snd_pcm_limit_hw_rates snd_pcm
 alias symbol:snd_rawmidi_transmit_ack snd_rawmidi
+alias symbol:usb_serial_register_drivers usbserial
 alias symbol:drm_calc_vbltimestamp_from_scanoutpos drm
 alias symbol:snd_pcm_format_width snd_pcm
 alias symbol:w1_read_8 wire
@@ -187,6 +197,7 @@ alias symbol:drm_connector_cleanup drm
 alias symbol:phy_ethtool_sset libphy
 alias symbol:usb_stor_resume usb_storage
 alias symbol:usbnet_generic_cdc_bind cdc_ether
+alias symbol:usb_serial_probe usbserial
 alias symbol:snd_rawmidi_set_ops snd_rawmidi
 alias symbol:hci_alloc_dev bluetooth
 alias symbol:usbnet_get_endpoints usbnet
@@ -210,6 +221,7 @@ alias symbol:w1_touch_block wire
 alias symbol:drm_edid_header_is_valid drm
 alias symbol:drm_fasync drm
 alias symbol:snd_device_register snd
+alias symbol:usb_serial_generic_close usbserial
 alias symbol:drm_plane_cleanup drm
 alias symbol:phy_start_interrupts libphy
 alias symbol:hci_conn_switch_role bluetooth
@@ -251,6 +263,7 @@ alias symbol:snd_ctl_activate_id snd
 alias symbol:drm_connector_attach_property drm
 alias symbol:w1_write_block wire
 alias symbol:snd_pcm_format_signed snd_pcm
+alias symbol:usb_serial_handle_break usbserial
 alias symbol:drm_gem_mmap drm
 alias symbol:usbnet_unlink_rx_urbs usbnet
 alias symbol:snd_pcm_open_substream snd_pcm
@@ -270,6 +283,7 @@ alias symbol:drm_connector_init drm
 alias symbol:snd_timer_global_free snd_timer
 alias symbol:drm_gem_object_handle_free drm
 alias symbol:drm_vblank_offdelay drm
+alias symbol:usb_serial_handle_sysrq_char usbserial
 alias symbol:snd_device_free snd
 alias symbol:drm_ht_remove drm
 alias symbol:drm_err drm
@@ -281,6 +295,7 @@ alias symbol:phy_driver_register libphy
 alias symbol:snd_pcm_hw_constraint_msbits snd_pcm
 alias symbol:drm_noop drm
 alias symbol:mdiobus_scan libphy
+alias symbol:usb_serial_generic_throttle usbserial
 alias symbol:phy_disconnect libphy
 alias symbol:mdiobus_read libphy
 alias symbol:snd_rawmidi_kernel_open snd_rawmidi
@@ -323,6 +338,7 @@ alias symbol:ump_dd_phys_block_get ump
 alias symbol:hci_free_dev bluetooth
 alias symbol:bt_accept_enqueue bluetooth
 alias symbol:drm_timestamp_precision drm
+alias symbol:usb_serial_generic_open usbserial
 alias symbol:hci_find_ltk bluetooth
 alias symbol:snd_unregister_device snd
 alias symbol:snd_free_pages snd_page_alloc
@@ -374,6 +390,8 @@ alias symbol:drm_gem_create_mmap_offset drm
 alias symbol:usb_stor_bulk_srb usb_storage
 alias symbol:snd_pcm_hw_param_last snd_pcm
 alias symbol:drm_mode_connector_list_update drm
+alias symbol:usb_serial_deregister_drivers usbserial
+alias symbol:usb_serial_disconnect usbserial
 alias symbol:usbnet_cdc_status cdc_ether
 alias symbol:snd_card_disconnect snd
 alias symbol:snd_info_get_str snd
@@ -450,6 +468,7 @@ alias symbol:drm_mode_config_cleanup drm
 alias symbol:snd_usbmidi_input_start snd_usbmidi_lib
 alias symbol:bt_sock_wait_state bluetooth
 alias symbol:w1_reset_bus wire
+alias symbol:usb_serial_generic_disconnect usbserial
 alias symbol:phy_start libphy
 alias symbol:drm_gem_free_mmap_offset drm
 alias symbol:drm_rmmap drm
@@ -503,6 +522,7 @@ alias symbol:usbnet_cdc_unbind cdc_ether
 alias symbol:_snd_pcm_lib_alloc_vmalloc_buffer snd_pcm
 alias symbol:hci_register_cb bluetooth
 alias symbol:snd_pcm_stop snd_pcm
+alias symbol:usb_serial_generic_write_bulk_callback usbserial
 alias symbol:usbnet_start_xmit usbnet
 alias symbol:drm_detect_monitor_audio drm
 alias symbol:ump_dd_reference_release ump
@@ -512,6 +532,7 @@ alias symbol:usb_stor_post_reset usb_storage
 alias symbol:hci_conn_security bluetooth
 alias symbol:drm_core_ioremap drm
 alias symbol:drm_get_platform_dev drm
+alias symbol:usb_serial_handle_dcd_change usbserial
 alias symbol:snd_ctl_unregister_ioctl snd
 alias symbol:drm_global_item_ref drm
 alias symbol:snd_info_create_module_entry snd
