@@ -38,6 +38,36 @@ fi
 /usr/bin/logger copying profile files
 /usr/bin/rsync -rtv $XCSoarData/*.prf $BackupPath/profiles
 
+# Delete files if stated in delete.txt
+if [ -f "$BackupPath/To-GN01/delete.txt" ]; then
+while read line
+do
+	if [ "$line" = "logs" ]
+	then
+		rm -f $XCSoarData/logs/*
+	elif [ "$line" = "xcm" ]
+	then
+		rm -f $XCSoarData/*.xcm
+	elif [ "$line" = "txt" ]
+	then
+		rm -f $XCSoarData/*.txt
+	elif [ "$line" = "prf" ]
+	then 
+		rm -f $XCSoarData/*.prf
+                cp $XCSoarBin/.default.prf $XCSoarData/default.prf
+	elif [ "$line" = "cup" ]
+	then 
+		rm -f $XCSoarData/*.cup
+	elif [ "$line" = "*" ]
+	then
+		rm -f $XCSoarData/*
+                cp $XCSoarBin/.default.prf $XCSoarData/default.prf
+                cp $XCSoarBin/.custom.xci $XCSoarData/custom.xci
+	fi
+done < $BackupPath/To-GN01/delete.txt
+rm -f $BackupPath/To-GN01/delete.txt
+fi
+
 /usr/bin/logger copying data files to GN-01
 /usr/bin/rsync -rtv $BackupPath/To-GN01/ $XCSoarData
 chown -fR rbe $XCSoarData
